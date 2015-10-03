@@ -24,6 +24,12 @@
             android:name=".MyInventarioActivity"
             android:label="@string/title_activity_my_inventario" >
         </activity>
+        <activity
+            android:name=".ActivoActivity"
+            android:label="@string/title_activity_my_inventario" >
+        </activity>
+        <activity android:name=".ListaActivoActivity" >
+        </activity>
     </application>
 
 </manifest>

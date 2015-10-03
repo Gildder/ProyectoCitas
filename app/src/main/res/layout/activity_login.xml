@@ -40,7 +40,9 @@
             android:layout_height="wrap_content"
             android:text="@string/BtnLogin"
             android:id="@+id/BtnLogin"
-            style="@style/BotonSuccess" />
+            style="@style/BotonSuccess"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClick"/>
 
         <TextView
             android:layout_width="match_parent"

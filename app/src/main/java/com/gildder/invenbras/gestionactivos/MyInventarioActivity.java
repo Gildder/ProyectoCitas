@@ -1,14 +1,14 @@
 package com.gildder.invenbras.gestionactivos;
 
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.ActionBar.TabListener;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.ActionBar.TabListener;
 
 import com.gildder.invenbras.gestionactivos.fragments.Inventarios;
 import com.gildder.invenbras.gestionactivos.fragments.Notificaciones;
@@ -43,8 +43,8 @@ public class MyInventarioActivity extends Activity implements TabListener {
         actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        actionBar.addTab(actionBar.newTab().setText("Inventarios").setTabListener(this));
-        actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this));
+        actionBar.addTab(actionBar.newTab().setText("Inventarios").setTabListener(this).setIcon(R.drawable.ic_action_inventario));
+        actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this).setIcon(R.drawable.ic_action_notificacion));
     }
 
     @Override

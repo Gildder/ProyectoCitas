@@ -8,7 +8,7 @@
     <!-- Tipografia Botones -->
     <style name="BotonSuccess">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@color/colorBotonSuccess</item>
     </style>
@@ -16,15 +16,15 @@
     <!-- Tipografia Body -->
     <style name="Body_1">
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textColor">@color/colorTextColorPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <!-- Tipografia Body Mensaje -->
     <style name="Body_2">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorRedDark</item>
     </style>
 </resources>
