@@ -47,7 +47,7 @@
             android:layout_marginTop="10dp"
             android:layout_height="45dp"
             android:id="@+id/imbUser"
-            android:background="@drawable/ripple"
+            android:background="@drawable/btn_circle_default"
             android:layout_gravity="center"
             android:src="@drawable/ic_button_user" />
 
