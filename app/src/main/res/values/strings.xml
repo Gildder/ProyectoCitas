@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AcBros</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Mensajes bienvenida-->
+    <string name="TextoBienvenida">Los inventarios mas valiosos</string>
+    <string name="TextoPieBienvenida">Se parte de nuestro equipo. P.</string>
+</resources>

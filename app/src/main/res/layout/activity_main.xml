@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:id="@+id/ImgBanner"
+        android:scaleType="centerCrop"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/banner" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/TextoBienvenida"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/textView"
+        android:layout_below="@+id/ImgBanner"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LntTextPieBienvenida"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/ImgBanner"
+        android:layout_alignStart="@+id/ImgBanner">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/TextoPieBienvenida"
+            android:id="@+id/textPieBienvenida"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/ImgBanner"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="45dp"
+            android:id="@+id/imbUser"
+            android:background="@drawable/ripple"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_button_user" />
+
+    </LinearLayout>
+
+</RelativeLayout>

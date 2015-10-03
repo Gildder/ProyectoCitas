@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores basicos interfaz-->
+    <color name="colorWindowBackground">#ECEFF1</color>
+    <color name="colorTextColorPrimary">#FAFAFA</color>
+
+
+    <color name="colorPrimary">#FB8C00</color>
+    <color name="colorPrimaryLight">#FFE0B2</color>
+    <color name="colorNavigationBar">#E65100</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+
+    <color name="colorAccent1">#82B1FF</color>
+    <color name="colorAccent2">#448AFF</color>
+    <color name="colorAccent4">#2979FF</color>
+    <color name="colorAccent7">#2962FF</color>
+
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorDividers">#E0E0E0</color>
+    <color name="colorHindText">#9E9E9E</color><!--Disabled/Hint Text-->
+    <color name="colorSecundaryText">#616161</color><!-- Secundary Text/Icons -->
+    <color name="colorText">#212121</color>
+
+
+
+
+
+
+    <!--  -->
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="textoOscuro_lista_inventario">#363636</color>
+    <color name="textoOscuroClaro_lista_inventario">#575757</color>
+    <color name="BajaPrioridad_lista_inventario">#61ea4b</color>
+    <color name="MediaPrioridad_lista_inventario">#e6ea4a</color>
+    <color name="AltaPrioridad_lista_inventario">#ea4717</color>
+    <color name="barra_lista_inventario">#11b0ea</color>
+</resources>
