@@ -26,27 +26,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/EtxUsuario"
-            style="@style/Body_1"
-            android:hint="Usuario" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/EtxContrasenia"
-            style="@style/Body_1"
-            android:hint="Contraseña" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/BtnLogin"
-            android:id="@+id/BtnLogin"
-            style="@style/BotonSuccess" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,5 +34,33 @@
             style="@style/Body_2"
             android:gravity="center"
             android:id="@+id/TxvMensaje" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/EtxUsuario"
+            style="@style/Body_1"
+            android:hint="Usuario" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/EtxContrasenia"
+            style="@style/Body_1"
+            android:hint="Contraseña" />
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="@string/BtnLogin"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_shape_rect"
+            android:id="@+id/BtnLogin"
+            style="@style/BotonSuccess"
+            android:layout_gravity="center_horizontal" />
+
+
     </LinearLayout>
 </RelativeLayout>

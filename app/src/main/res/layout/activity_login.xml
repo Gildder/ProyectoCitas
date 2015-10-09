@@ -21,6 +21,16 @@
         android:layout_marginTop="10dp"
         android:id="@+id/LntSesion">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Mensaje Error"
+            style="@style/Body_2"
+            android:gravity="center"
+            android:id="@+id/TxvMensaje" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,25 +42,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/EtxContrasenia"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"
             style="@style/Body_1"
             android:hint="Contraseña" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="@string/BtnLogin"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_shape_rect"
             android:id="@+id/BtnLogin"
             style="@style/BotonSuccess"
             android:layout_gravity="center_horizontal"
             android:onClick="onClick"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Mensaje Error"
-            style="@style/Body_2"
-            android:gravity="center"
-            android:id="@+id/TxvMensaje" />
+
     </LinearLayout>
 </RelativeLayout>
