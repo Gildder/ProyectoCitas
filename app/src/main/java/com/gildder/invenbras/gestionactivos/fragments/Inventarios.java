@@ -66,13 +66,15 @@ public class Inventarios extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 */
 
-        TaskInventario tarea = new TaskInventario();
-        tarea.execute();
+   //     TaskInventario tarea = new TaskInventario();
+     //   tarea.execute();
+
     }
 
     /**
      * Clase Tarea
      */
+/*
     public class TaskInventario extends AsyncTask<String,Integer,Boolean> {
         private Inventario[] inventarios;
 
@@ -152,4 +154,5 @@ public class Inventarios extends Fragment {
 
 
     }//fin clase Task
+    */
 }
