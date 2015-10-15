@@ -6,6 +6,8 @@
     <!-- Mensajes bienvenida-->
     <string name="TextoBienvenida">Los inventarios mas valiosos</string>
     <string name="TextoPieBienvenida">Se parte de nuestro equipo. P.</string>
+
+
     <!-- Login -->
     <string name="title_activity_login">Inicio Session</string>
     <string name="BtnLogin">Entrar</string>
@@ -15,10 +17,19 @@
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Row Inventario -->
     <string name="TxvNombreInventario">Nombre</string>
     <string name="TxvDescripcionInventario">Descripcion</string>
     <string name="TxvPrioriInventario">P</string>
     <string name="TxvCountInvnetario">nro</string>
+
+    <!-- Row Activo -->
+    <string name="TxvModelo">Modelo:</string>
+    <string name="TxvMarca">Marca:</string>
+    <string name="TxvSerie">Serie:</string>
+    <string name="TxvEstado">Estado</string>
+    <string name="TxvTipo">Tipo</string>
 
 
 </resources>

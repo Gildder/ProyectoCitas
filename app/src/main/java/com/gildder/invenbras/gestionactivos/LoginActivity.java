@@ -87,16 +87,17 @@ public class LoginActivity extends Activity {
      */
     public void onClick(View v) {
 
+        if (etxUsuario.getText().toString().equals("") || etxContrasenia.getText().toString().equals("")) {
+            txvMensaje.setText("Por favos, Llene los campos");
+            return;
+        }
+
         //Proceso de dialogo
         pgdProceso = new ProgressDialog(LoginActivity.this);
         pgdProceso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pgdProceso = ProgressDialog.show(this,"Espere por favor","Procesando...");
         pgdProceso.setCancelable(true);
 
-        if (etxUsuario.getText().toString().equals("") || etxContrasenia.getText().toString().equals("")) {
-            txvMensaje.setText("Por favos, Llene los campos");
-            return;
-        }
 
 
         tarea = new TaskValidacionUsuario();

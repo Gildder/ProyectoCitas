@@ -63,7 +63,7 @@ public class Inventarios extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.RclInventario);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new InventarioAdapter(inventarios, R.layout.row_inventario));
+        recyclerView.setAdapter(new InventarioAdapter(getActivity(),inventarios, R.layout.row_inventario));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

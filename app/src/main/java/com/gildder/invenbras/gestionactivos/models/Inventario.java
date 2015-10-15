@@ -49,6 +49,18 @@ public class Inventario {
     }
 
     public void setPrioridad(String prioridad) {
-        this.prioridad = prioridad;
+        String priori="X";
+        switch (prioridad){
+            case "1":
+                priori = "B";
+                break;
+            case "2":
+                priori = "M";
+                break;
+            case "3":
+                priori = "A";
+                break;
+        }
+        this.prioridad = priori;
     }
 }

@@ -27,7 +27,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:text="Mensaje Error"
-            style="@style/Body_2"
+            style="@style/Body_sms"
             android:gravity="center"
             android:id="@+id/TxvMensaje" />
 
