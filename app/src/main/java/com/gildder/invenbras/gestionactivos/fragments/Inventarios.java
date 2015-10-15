@@ -27,6 +27,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Inventarios extends Fragment {
@@ -45,14 +46,15 @@ public class Inventarios extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-/*
+
         ArrayList<Inventario> inventarios = new ArrayList<Inventario>();
 
         for (int i=0;i<10;i++) {
             Inventario inventario = new Inventario();
-            inventario.setNombre("Juan pable");
-            inventario.setDescripcion("Juan pable");
-            inventario.setPrioridad("Juan pable");
+            inventario.setId(i);
+            inventario.setNombre("Inventario "+i);
+            inventario.setDescripcion("descripcion "+i);
+            inventario.setPrioridad((String.valueOf( new Random().nextInt(3)+1)));
 
 
             inventarios.add(inventario);
@@ -64,7 +66,7 @@ public class Inventarios extends Fragment {
         recyclerView.setAdapter(new InventarioAdapter(inventarios, R.layout.row_inventario));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-*/
+
 
    //     TaskInventario tarea = new TaskInventario();
      //   tarea.execute();

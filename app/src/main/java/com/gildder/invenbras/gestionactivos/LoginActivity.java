@@ -18,12 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gildder.invenbras.gestionactivos.Utils.TaskValidacionUsuario;
-import com.gildder.invenbras.gestionactivos.Utils.Util;
-import com.gildder.invenbras.gestionactivos.fragments.Inventarios;
+
 import com.gildder.invenbras.gestionactivos.models.Inventario;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -38,11 +37,13 @@ import java.io.IOException;
 import java.lang.Thread;
 
 public class LoginActivity extends Activity {
-    EditText etxUsuario;
-    EditText etxContrasenia;
-    TextView txvMensaje;
+    private EditText etxUsuario;
+    private EditText etxContrasenia;
+    private TextView txvMensaje;
+    private ProgressDialog pgdProceso;
 
-    boolean isSave=false;
+
+    private TaskValidacionUsuario tarea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +51,11 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
 
+        etxUsuario = (EditText) findViewById(R.id.EtxUsuario);
+        etxContrasenia = (EditText) findViewById(R.id.EtxContrasenia);
         txvMensaje = (TextView) findViewById(R.id.TxvMensaje);
         txvMensaje.setText("");
+
     }
 
     @Override
@@ -76,73 +80,63 @@ public class LoginActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Este metodo maneja el evento Click
+     *
+     * @param v Evento de click
+     */
     public void onClick(View v) {
-        etxUsuario = (EditText) findViewById(R.id.EtxUsuario);
-        etxContrasenia = (EditText) findViewById(R.id.EtxContrasenia);
-        txvMensaje = (TextView) findViewById(R.id.TxvMensaje);
-        txvMensaje.setText("");
+
+        //Proceso de dialogo
+        pgdProceso = new ProgressDialog(LoginActivity.this);
+        pgdProceso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pgdProceso = ProgressDialog.show(this,"Espere por favor","Procesando...");
+        pgdProceso.setCancelable(true);
 
         if (etxUsuario.getText().toString().equals("") || etxContrasenia.getText().toString().equals("")) {
             txvMensaje.setText("Por favos, Llene los campos");
             return;
         }
 
-        //ventana de procesos
-        //final ProgressDialog progressDialog = ProgressDialog.show(getApplication(),"Espero por favos", "estamos procesando los datos");
 
-        TaskValidacionUsuario tarea = new TaskValidacionUsuario();
-        tarea.setUsuario(etxUsuario.getText().toString());
-        tarea.setContrasenia(etxContrasenia.getText().toString());
+        tarea = new TaskValidacionUsuario();
         tarea.execute();
 
-        if (isSave) {
-            //paso al otro activity
-            startActivity(new Intent(LoginActivity.this, MyInventarioActivity.class));
-        }
     }
 
-    void MensajeBox(String mensaje) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(mensaje)
-                .setCancelable(false)
-                .setNeutralButton("Aceptar",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
 
-    public void MensajeToats(String sms) {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast_layout_root, (ViewGroup) findViewById(R.id.toast_layout_root));
 
-        TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText(sms);
 
-        ImageView img = (ImageView) layout.findViewById(R.id.imgLogo);
-        img.setImageResource(R.drawable.ic_stat_servidor);
 
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
-    }
-
+    //********************************** CLASE INTERNA ***********************************************************
     /**
      * Clase Tarea
      */
-    public class TaskValidacionUsuario extends AsyncTask<String, Integer, Boolean> {
+    public class TaskValidacionUsuario extends AsyncTask<Void, Integer, Boolean> {
         private String usuario;
         private String contrasenia;
 
-        boolean isServidor = true;
+        private boolean isServidor = true;
 
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected void onPreExecute() {
+
+
+            tarea.setUsuario(etxUsuario.getText().toString());
+            tarea.setContrasenia(etxContrasenia.getText().toString());
+
+            pgdProceso.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    TaskValidacionUsuario.this.cancel(true);
+                }
+            });
+
+            pgdProceso.show();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
             boolean result = true;
 
             String NAMESPACE = "http://ibrasact.com.bo/";
@@ -157,7 +151,6 @@ public class LoginActivity extends Activity {
 
             //modelo envolepe
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-
             envelope.dotNet = true;
 
             envelope.setOutputSoapObject(request);
@@ -180,11 +173,13 @@ public class LoginActivity extends Activity {
                 isServidor = false;
                 e.printStackTrace();
             }
+
             return result;
         }
 
+        @Override
         protected void onPostExecute(Boolean result) {
-            isSave = result;
+            pgdProceso.dismiss();
 
             if (result) {
                 //usuario correcto guardamos los datos
@@ -197,12 +192,12 @@ public class LoginActivity extends Activity {
                 editor.commit();
 
 
-
-
+                //paso al otro activity
+                startActivity(new Intent(LoginActivity.this, MyInventarioActivity.class));
 
                 finish();
             } else {
-                if (isServidor == false)
+                if (!isServidor)
                     //Toast.makeText(getApplicationContext(),"No se pudo conectar al servidor",Toast.LENGTH_SHORT).show();
                     MensajeToats("No se pudo conectar al servidor");
                 else
@@ -210,23 +205,44 @@ public class LoginActivity extends Activity {
             }
         }
 
-        public String getUsuario() {
-            return usuario;
-        }
 
+
+
+        /* Metodos Getter y Setter */
         public void setUsuario(String usuario) {
             this.usuario = usuario;
-        }
-
-        public String getContrasenia() {
-            return contrasenia;
         }
 
         public void setContrasenia(String contrasenia) {
             this.contrasenia = contrasenia;
         }
+
     }//fin clase Task
 
+    //***************************** Fin Clase Interna *********************************
+
+
+    /**
+     * Este metodo permite realizar Toast configurable
+     *
+     * @param sms mensaje de entrada
+     */
+    private void MensajeToats(String sms) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_layout_root, (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        TextView text = (TextView) layout.findViewById(R.id.text);
+        text.setText(sms);
+
+        ImageView img = (ImageView) layout.findViewById(R.id.imgLogo);
+        img.setImageResource(R.drawable.ic_stat_servidor);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
 
     /*
 
