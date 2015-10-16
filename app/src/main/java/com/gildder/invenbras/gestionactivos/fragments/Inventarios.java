@@ -1,30 +1,17 @@
 package com.gildder.invenbras.gestionactivos.fragments;
 
 import android.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gildder.invenbras.gestionactivos.MyInventarioActivity;
 import com.gildder.invenbras.gestionactivos.R;
-import com.gildder.invenbras.gestionactivos.Utils.Util;
 import com.gildder.invenbras.gestionactivos.adapters.InventarioAdapter;
 import com.gildder.invenbras.gestionactivos.models.Inventario;
-
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 import java.util.Random;

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,14 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.gildder.invenbras.gestionactivos.models.Inventario;
-
-import org.apache.commons.codec.digest.DigestUtils;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -34,7 +29,6 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
-import java.lang.Thread;
 
 public class LoginActivity extends Activity {
     private EditText etxUsuario;
@@ -194,7 +188,7 @@ public class LoginActivity extends Activity {
 
 
                 //paso al otro activity
-                startActivity(new Intent(LoginActivity.this, MyInventarioActivity.class));
+                startActivity(new Intent(LoginActivity.this, FragmentTabsActivity.class));
 
                 finish();
             } else {
@@ -303,7 +297,7 @@ public class LoginActivity extends Activity {
                             editor.commit();
 
                             //paso al otro activity
-                            startActivity(new Intent(LoginActivity.this, MyInventarioActivity.class));
+                            startActivity(new Intent(LoginActivity.this, FragmentTabsActivity.class));
 
                             finish();
                         } else {

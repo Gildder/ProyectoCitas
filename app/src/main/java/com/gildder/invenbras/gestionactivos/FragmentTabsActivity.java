@@ -13,18 +13,23 @@ import android.view.MenuItem;
 import com.gildder.invenbras.gestionactivos.fragments.Inventarios;
 import com.gildder.invenbras.gestionactivos.fragments.Notificaciones;
 
-public class MyInventarioActivity extends Activity implements TabListener {
+public class FragmentTabsActivity extends Activity implements TabListener {
     ActionBar actionBar;
 
+    /**
+     *  Arreglo de fragmentos
+     */
     private Fragment[] fragments = new  Fragment[]{
             new Inventarios(),
             new Notificaciones()
     };
 
+
+    /*  METODOS DEL Ativity */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_inventario);
+        setContentView(R.layout.activity_fragment_tabs);
 
         setTabs();
 
@@ -39,13 +44,7 @@ public class MyInventarioActivity extends Activity implements TabListener {
         fragmentTransaction.show(fragments[0]).commit();
     }
 
-    private void setTabs(){
-        actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        actionBar.addTab(actionBar.newTab().setText("Inventarios").setTabListener(this).setIcon(R.drawable.ic_action_inventario));
-        actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this).setIcon(R.drawable.ic_action_notificacion));
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,8 +68,10 @@ public class MyInventarioActivity extends Activity implements TabListener {
         return super.onOptionsItemSelected(item);
     }
 
+    /* METODOS DEL TabsListener */
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+        //oculta todos los fragmentos
         for (Fragment fragment:fragments){
             fragmentTransaction.hide(fragment);
         }
@@ -86,5 +87,19 @@ public class MyInventarioActivity extends Activity implements TabListener {
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
+    }
+
+
+    /*  Metodos implementados */
+
+    /**
+     * Este metodo adiciona tabs al actionBar
+     */
+    private void setTabs(){
+        actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        actionBar.addTab(actionBar.newTab().setText("Inventarios").setTabListener(this).setIcon(R.drawable.ic_action_inventario));
+        actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this).setIcon(R.drawable.ic_action_notificacion));
     }
 }
