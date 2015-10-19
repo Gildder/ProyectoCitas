@@ -12,8 +12,8 @@ public class Computacion extends Activo {
         this.nroEquipo = nroEquipo;
     }
 
-    public Computacion(int id, String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String estado1, String nroCaja, String nroEquipo) {
-        super(id, tipo,  modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
+    public Computacion(int id, String caracteristicas, String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String estado1, String nroCaja, String nroEquipo) {
+        super(id, caracteristicas, tipo,  modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
         estado = estado1;
         this.nroCaja = nroCaja;
         this.nroEquipo = nroEquipo;

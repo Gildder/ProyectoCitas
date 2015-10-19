@@ -4,29 +4,29 @@ package com.gildder.invenbras.gestionactivos.models;
  * Created by gildder on 15/10/2015.
  */
 public class MaterialCantidad extends Activo {
-    private String caracteristicas;
+    private String nombre;
     private int cantidad;
     private String unidad;
 
-    public MaterialCantidad(String caracteristicas, int cantidad, String unidad) {
-        this.caracteristicas = caracteristicas;
+    public MaterialCantidad(String nombre, int cantidad, String unidad) {
+        this.nombre = nombre;
         this.cantidad = cantidad;
         this.unidad = unidad;
     }
 
-    public MaterialCantidad(int id, String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String caracteristicas, int cantidad, String unidad) {
-        super(id, tipo,  modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
-        this.caracteristicas = caracteristicas;
+    public MaterialCantidad(int id, String caracteristicas, String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String nombre, int cantidad, String unidad) {
+        super(id, caracteristicas, tipo,  modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
+        this.nombre = nombre;
         this.cantidad = cantidad;
         this.unidad = unidad;
     }
 
-    public String getCaracteristicas() {
-        return caracteristicas;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getCantidad() {

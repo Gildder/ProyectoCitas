@@ -1,6 +1,7 @@
 package com.gildder.invenbras.gestionactivos.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,9 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.gildder.invenbras.gestionactivos.ListaActivoActivity;
 import com.gildder.invenbras.gestionactivos.R;
 import com.gildder.invenbras.gestionactivos.adapters.InventarioAdapter;
+import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
 import com.gildder.invenbras.gestionactivos.models.Inventario;
 
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ public class Inventarios extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<Inventario> inventarios = new ArrayList<Inventario>();
+        final ArrayList<Inventario> inventarios = new ArrayList<Inventario>();
 
         for (int i=0;i<10;i++) {
             Inventario inventario = new Inventario();
@@ -50,7 +54,21 @@ public class Inventarios extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.RclInventario);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new InventarioAdapter(getActivity(),inventarios, R.layout.row_inventario));
+        recyclerView.setAdapter(new InventarioAdapter(getActivity(), inventarios, new RecyclerViewOnItemListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Toast toast = Toast.makeText(getActivity(), inventarios.get(position).getNombre(), Toast.LENGTH_SHORT);
+                toast.show();
+
+                Intent intent = new Intent(getActivity(), ListaActivoActivity.class);
+                intent.putExtra("ID",inventarios.get(position).getId());
+                intent.putExtra("NOMBRE",inventarios.get(position).getNombre());
+
+                int cantidad = 0;
+                startActivityForResult(intent,cantidad);
+
+            }
+        }));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 

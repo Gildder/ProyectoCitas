@@ -7,13 +7,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gildder.invenbras.gestionactivos.R;
+import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
 
 /**
  * Esta clase relacion los view del Xml row_inventario
  *
  * Created by gildder on 15/10/2015.
  */
-public class vhRowInventario extends RecyclerView.ViewHolder {
+public class vhRowInventario extends RecyclerView.ViewHolder implements View.OnClickListener{
     protected TextView nombre;
     protected TextView descripcion;
     protected TextView prioridad;
@@ -21,7 +22,9 @@ public class vhRowInventario extends RecyclerView.ViewHolder {
     protected RelativeLayout relativeLayout;
     protected CardView cardView;
 
-    public vhRowInventario(View itemView) {
+    private RecyclerViewOnItemListener recyclerViewOnItemListener;
+
+    public vhRowInventario(View itemView, RecyclerViewOnItemListener recyclerViewOnItemListener) {
         super(itemView);
 
         this.nombre = (TextView) itemView.findViewById(R.id.TxvModelo);
@@ -32,7 +35,12 @@ public class vhRowInventario extends RecyclerView.ViewHolder {
         this.relativeLayout = (RelativeLayout) itemView.findViewById(R.id.RltContentInventario);
         this.cardView = (CardView) itemView.findViewById(R.id.cardViewInventario);
 
-        itemView.setClickable(true);
+        this.recyclerViewOnItemListener = recyclerViewOnItemListener;
+        itemView.setOnClickListener(this);
     }
 
+    @Override
+    public void onClick(View v) {
+        recyclerViewOnItemListener.onClick(v, getAdapterPosition());
+    }
 }

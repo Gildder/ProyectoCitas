@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+
+    <item android:id="@+id/activoGuardar" android:title="@string/action_guardar"
+        android:orderInCategory="10"
+        android:icon="@drawable/ic_action_guardar"  app:showAsAction="always" />
+
+
+</menu>

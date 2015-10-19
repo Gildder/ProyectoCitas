@@ -18,8 +18,8 @@ public class Extintor extends Activo {
         this.fechaMantenimiento = fechaMantenimiento;
     }
 
-    public Extintor(int id, String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String codigo, String numero, String contenido, String peso, String fechaMantenimiento) {
-        super(id, tipo, modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
+    public Extintor(int id,  String caracteristicas,String tipo,  String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, String codigo, String numero, String contenido, String peso, String fechaMantenimiento) {
+        super(id,  caracteristicas, tipo, modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
         this.codigo = codigo;
         this.numero = numero;
         this.contenido = contenido;

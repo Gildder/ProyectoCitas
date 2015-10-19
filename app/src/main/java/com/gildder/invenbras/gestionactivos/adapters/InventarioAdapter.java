@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gildder.invenbras.gestionactivos.ListaActivoActivity;
 import com.gildder.invenbras.gestionactivos.R;
+import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
 import com.gildder.invenbras.gestionactivos.models.Inventario;
 
 import java.util.ArrayList;
@@ -22,35 +24,28 @@ public class InventarioAdapter extends RecyclerView.Adapter<vhRowInventario> {
     private int itemLayout;
     private Context context;
 
+    //interface defini en interfaces
+    private RecyclerViewOnItemListener recyclerViewOnItemListener;
+
 
     /**
      * Este metodo es el contructor de la clase.
      *
      * @param context El context de la actividad
      * @param inventarios La lista de inventarios
-     * @param itemLayout    El item seleccionado
+     * @param recyclerViewOnItemListener    El Evento seleccionado
      */
-    public InventarioAdapter(Context context, ArrayList<Inventario> inventarios, int itemLayout) {
+    public InventarioAdapter(Context context, ArrayList<Inventario> inventarios,
+                             RecyclerViewOnItemListener recyclerViewOnItemListener) {
         this.context = context;
         this.inventarios = inventarios;
-        this.itemLayout = itemLayout;
+        this.recyclerViewOnItemListener = recyclerViewOnItemListener;
     }
 
     @Override
     public vhRowInventario onCreateViewHolder(ViewGroup viewGroup, final int position) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
-        vhRowInventario holder = new vhRowInventario(v);
-
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(context, ListaActivoActivity.class);
-                intent.putExtra("ID",inventarios.get(position).getId());
-                intent.putExtra("NOMBRE",inventarios.get(position).getNombre());
-                context.startActivity(intent);
-            }
-        });
-
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_inventario, viewGroup, false);
+        vhRowInventario holder = new vhRowInventario(v,recyclerViewOnItemListener);
 
         return holder;
     }

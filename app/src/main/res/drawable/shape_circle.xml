@@ -3,11 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-
     <size android:height="@dimen/fab_size" android:width="@dimen/fab_size"/>
-    <gradient
-        android:angle="270"
-        android:startColor="@color/colorAccent2"
-        android:endColor="@color/colorAccent7"
-        android:type="linear" />
+    <solid android:color="@color/colorPrimaryDark"/>
+    <corners
+        android:radius="8dp"/>
+
 </shape>

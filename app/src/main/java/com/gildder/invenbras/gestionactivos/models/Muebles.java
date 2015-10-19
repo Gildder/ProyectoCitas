@@ -18,8 +18,8 @@ public class Muebles extends Activo {
         this.color = color;
     }
 
-    public Muebles(int id, String tipo, String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, float alto, float ancho, float profundidad, String nroMueble, String color) {
-        super(id, tipo, modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
+    public Muebles(int id, String caracteristicas, String tipo, String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, float alto, float ancho, float profundidad, String nroMueble, String color) {
+        super(id, caracteristicas, tipo, modelo, marca, serie, estado, codigoTIC, codigoPAT, codigoAF, codigoGER, otroCodigo, imagen, observacion);
         this.alto = alto;
         this.ancho = ancho;
         this.profundidad = profundidad;

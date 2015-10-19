@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/BtnLogin"
             android:layout_marginTop="10dp"
-            android:background="@drawable/btn_shape_rect"
+            android:background="@drawable/btn_rect"
             android:id="@+id/BtnLogin"
             style="@style/BotonSuccess"
             android:layout_gravity="center_horizontal"

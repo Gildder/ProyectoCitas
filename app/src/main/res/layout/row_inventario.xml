@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/TxvPrioriInventario"
             android:id="@+id/TxvPrioridadInventario"
-            android:background="@drawable/btn_shape_rect"
+            android:background="@drawable/btn_rect_default"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:paddingRight="10dp"

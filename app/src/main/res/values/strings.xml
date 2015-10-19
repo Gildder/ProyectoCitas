@@ -31,5 +31,9 @@
     <string name="TxvEstado">Estado</string>
     <string name="TxvTipo">Tipo</string>
 
+    <!-- acciones Activo -->
+    <string name="action_activos">Tipo Activo</string>
+    <string name="action_guardar">Guardar</string>
+
 
 </resources>

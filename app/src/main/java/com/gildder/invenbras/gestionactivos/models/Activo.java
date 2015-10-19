@@ -5,6 +5,7 @@ package com.gildder.invenbras.gestionactivos.models;
  */
 public class Activo {
     private int id;
+    private String caracteristicas;
     private String tipo;
     private String modelo;
     private String marca;
@@ -22,10 +23,10 @@ public class Activo {
     public Activo() {
     }
 
-    public Activo(int id, String tipo, String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion) {
+    public Activo(int id, String caracteristicas, String tipo, String modelo, String marca, String serie, String estado, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion) {
         this.id = id;
+        this.caracteristicas = caracteristicas;
         this.tipo = tipo;
-
         this.modelo = modelo;
         this.marca = marca;
         this.serie = serie;
@@ -39,8 +40,7 @@ public class Activo {
         Observacion = observacion;
     }
 
-
-    /*  Getter y Setter */
+   /*  Getter y Setter */
 
     public int getId() {
         return id;
@@ -50,6 +50,14 @@ public class Activo {
         this.id = id;
     }
 
+    public String getNombre() {
+        return caracteristicas;
+    }
+
+    public void setNombre(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
     public String getTipo() {
         return tipo;
     }
@@ -57,7 +65,6 @@ public class Activo {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
 
     public String getModelo() {
         return modelo;

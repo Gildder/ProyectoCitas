@@ -9,6 +9,16 @@ public class Util {
     public final static String URL = "http://192.168.56.1/InventarioWS/WebService.asmx";
 
 
+/**
+ **************************Caractaristicas de desarrollo*************************
+ ListView        =>   Ltv
+ LinearLayout   =>   Lnt
+ RelativeLayout =>   Rnt
+ Button         =>   Btn
+ imageButton     =>   Imb
 
+ TextView       =>  Txv
+ EditText       => Edt
+ * */
 
 }
