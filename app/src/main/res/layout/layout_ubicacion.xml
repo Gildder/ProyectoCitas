@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/LntUbicacion"
+    tools:showIn="@layout/activity_activo">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ubicacion"
+        android:padding="10dp"
+        style="@style/Body_1B"
+        android:id="@+id/TxvTituloUbicacion"
+        android:background="@color/colorDividers"
+        android:textColor="@color/colorText" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <!-- label de ubicacion -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="118dp"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Body_1B"
+                android:text="Sector"
+                android:id="@+id/textView6"
+                android:layout_weight="0.07" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Body_1B"
+                android:text="Estante"
+                android:id="@+id/textView7"
+                android:layout_weight="0.08" />
+        </LinearLayout>
+
+        <!-- Edit de la ubicacion -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EdtSector"
+                android:layout_weight="0.76"
+                android:hint="A - B" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/EdtEstante"
+                android:layout_weight="0.73"
+                android:hint="lugar" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:id="@+id/EdtObservacion"
+                android:hint="Observaciones" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,9 +1,13 @@
 package com.gildder.invenbras.gestionactivos.models;
 
+import java.io.Serializable;
+
 /**
  * Created by gildder on 15/10/2015.
  */
-public class Activo {
+public class Activo implements Serializable{
+    private static final long serialVersionUID = 103458757245584525L;
+
     private int id;
     private String caracteristicas;
     private String tipo;
@@ -42,7 +46,7 @@ public class Activo {
 
    /*  Getter y Setter */
 
-    public int getId() {
+    public int getId(int anInt) {
         return id;
     }
 
@@ -50,11 +54,11 @@ public class Activo {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setNombre(String caracteristicas) {
+    public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 

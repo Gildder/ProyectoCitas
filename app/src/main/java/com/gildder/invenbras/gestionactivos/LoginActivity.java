@@ -21,6 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -36,6 +43,8 @@ public class LoginActivity extends Activity {
     private TextView txvMensaje;
     private ProgressDialog pgdProceso;
 
+    private boolean isServidor = true;
+    private boolean res = false;
 
     private TaskValidacionUsuario tarea;
 
@@ -44,14 +53,15 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        init();
+    }
 
+    public  void init(){
         etxUsuario = (EditText) findViewById(R.id.EtxUsuario);
         etxContrasenia = (EditText) findViewById(R.id.EtxContrasenia);
         txvMensaje = (TextView) findViewById(R.id.TxvMensaje);
         txvMensaje.setText("");
-
     }
-
 
 
     /**
@@ -70,35 +80,34 @@ public class LoginActivity extends Activity {
         pgdProceso = new ProgressDialog(LoginActivity.this);
         pgdProceso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pgdProceso = ProgressDialog.show(this,"Espere por favor","Procesando...");
-        pgdProceso.setCancelable(true);
-
+        pgdProceso.setCancelable(false);
 
 
         tarea = new TaskValidacionUsuario();
-        tarea.execute();
+        tarea.execute(etxUsuario.getText().toString(),etxContrasenia.getText().toString());
+
+        //TaskValidacion tareaRest = new TaskValidacion();
+        //tareaRest.execute(etxUsuario.getText().toString(),etxContrasenia.getText().toString());
 
     }
-
-
-
 
 
     //********************************** CLASE INTERNA ***********************************************************
     /**
      * Clase Tarea
      */
-    public class TaskValidacionUsuario extends AsyncTask<Void, Integer, Boolean> {
-        private String usuario;
-        private String contrasenia;
+    public class TaskValidacionUsuario extends AsyncTask<String, Integer, Boolean> {
+        boolean result = false;
 
-        private boolean isServidor = true;
+        String NAMESPACE = "http://ibrasact.com.bo/";
+        String URL = "http://192.168.42.48/InventarioWS/WebService.asmx";
+        //String URL = "http://192.168.42.48:1037/WebService.asmx";
+        String METHOD_NAME = "ValidarUsuario";
+        String SOAP_ACTION = "http://ibrasact.com.bo/ValidarUsuario";
+
 
         @Override
         protected void onPreExecute() {
-
-
-            tarea.setUsuario(etxUsuario.getText().toString());
-            tarea.setContrasenia(etxContrasenia.getText().toString());
 
             pgdProceso.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -111,18 +120,13 @@ public class LoginActivity extends Activity {
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            boolean result = true;
+        protected Boolean doInBackground(String... params) {
 
-            String NAMESPACE = "http://ibrasact.com.bo/";
-            String URL = "http://192.168.56.1/InventarioWS/WebService.asmx";
-            String METHOD_NAME = "ValidarUsuario";
-            String SOAP_ACTION = "http://ibrasact.com.bo/ValidarUsuario";
 
             //modelo del request
             SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-            request.addProperty("usuario", usuario);      //Paso de parametro
-            request.addProperty("contrasenia", contrasenia);
+            request.addProperty("usuario",   params[0] );      //Paso de parametro
+            request.addProperty("contrasenia",  params[1] );
 
             //modelo envolepe
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -131,7 +135,7 @@ public class LoginActivity extends Activity {
             envelope.setOutputSoapObject(request);
 
             //modo de transporte
-            HttpTransportSE transport = new HttpTransportSE(URL);
+            HttpTransportSE transport = new HttpTransportSE(URL,60000);
 
             try {
                 transport.call(SOAP_ACTION, envelope);
@@ -180,21 +184,10 @@ public class LoginActivity extends Activity {
             }
         }
 
-
-
-
-        /* Metodos Getter y Setter */
-        public void setUsuario(String usuario) {
-            this.usuario = usuario;
-        }
-
-        public void setContrasenia(String contrasenia) {
-            this.contrasenia = contrasenia;
-        }
-
     }//fin clase Task
 
-    //***************************** Fin Clase Interna *********************************
+
+
 
 
     /**
@@ -219,77 +212,5 @@ public class LoginActivity extends Activity {
         toast.show();
     }
 
-    /*
 
-    Thread nt = new Thread() {
-            boolean res;
-            boolean isServidor = true;
-
-            @Override
-            public void run() {
-                String NAMESPACE = "http://ibrasact.com.bo/";
-                String URL = "http://192.168.56.1/InventarioWS/WebService.asmx";
-                String METHOD_NAME = "ValidarUsuario";
-                String SOAP_ACTION = "http://ibrasact.com.bo/ValidarUsuario";
-
-                //modelo del request
-                SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-                request.addProperty("usuario", etxUsuario.getText().toString());      //Paso de parametro
-                request.addProperty("contrasenia", etxContrasenia.getText().toString());
-
-                //modelo envolepe
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                envelope.dotNet = true;
-
-                envelope.setOutputSoapObject(request);
-
-                //modo de transporte
-                HttpTransportSE transport = new HttpTransportSE(URL);
-
-                try {
-                    transport.call(SOAP_ACTION, envelope);
-
-                    SoapPrimitive resSoap = (SoapPrimitive) envelope.getResponse();
-
-                    res = Boolean.parseBoolean(resSoap.toString());
-
-                } catch (IOException ex) {
-                    isServidor = false;
-                    Log.e("ERROR...", ex.getMessage());
-                    ex.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    isServidor = false;
-                    e.printStackTrace();
-                }
-                //return res;
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (res) {
-                            //usuario correcto guardamos los datos
-                            SharedPreferences settings = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putString("usuario", etxUsuario.getText().toString());
-                            editor.putString("contrasenia", etxContrasenia.getText().toString());
-
-                            //confirmamos el almacenamiento
-                            editor.commit();
-
-                            //paso al otro activity
-                            startActivity(new Intent(LoginActivity.this, FragmentTabsActivity.class));
-
-                            finish();
-                        } else {
-                            if (isServidor == false)
-                                //Toast.makeText(getApplicationContext(),"No se pudo conectar al servidor",Toast.LENGTH_SHORT).show();
-                                MensajeToats("No se pudo conectar al servidor");
-                            else
-                                txvMensaje.setText("Usuario o contraseña incorrectos");
-                        }
-                    }
-                });
-            }
-        };
-     */
 }

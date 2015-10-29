@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    tools:showIn="@layout/activity_activo">
+
+    <!-- codigo-->
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvCodigo"
+        android:layout_margin="10dp"
+        android:id="@+id/TxvCodigo" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtCodigo"
+        android:hint="11002"
+        android:layout_toRightOf="@+id/TxvCodigo"
+        android:layout_toEndOf="@+id/TxvCodigo" />
+
+    <!-- numero-->
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvNumero"
+        android:id="@+id/TxvNro"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/EdtCodigo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtNro"
+        android:hint="12345"
+        android:layout_below="@+id/EdtCodigo"
+        android:layout_toRightOf="@+id/TxvNro"
+        android:layout_toEndOf="@+id/TxvNro" />
+
+    <!-- Contenido -->
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvContenido"
+        android:id="@+id/TxvContenido"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/EdtNro" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtContenido"
+        android:hint="espuma"
+        android:layout_below="@+id/EdtNro"
+        android:layout_toRightOf="@+id/TxvContenido"
+        android:layout_toEndOf="@+id/TxvContenido" />
+
+    <!-- peso-->
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvPeso"
+        android:id="@+id/TxvPeso"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/TxvContenido"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtPeso"
+        android:hint="1 kg"
+        android:layout_below="@+id/EdtContenido"
+        android:layout_toRightOf="@+id/TxvPeso"
+        android:layout_toEndOf="@+id/TxvPeso" />
+
+    <!-- fecha-->
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvFecha"
+        android:id="@+id/TxvFecha"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/TxvPeso"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:id="@+id/EdtFecha"
+        android:hint="10/03/2015"
+        android:layout_alignTop="@+id/TxvFecha"
+        android:layout_toRightOf="@+id/TxvFecha"
+        android:layout_alignRight="@+id/EdtPeso"
+        android:layout_alignEnd="@+id/EdtPeso" />
+
+
+</RelativeLayout>

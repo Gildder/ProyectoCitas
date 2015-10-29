@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="10dp"
+    tools:showIn="@layout/activity_activo">
+
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvNroCaja"
+        android:id="@+id/TxvNroCaja"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/TxvNroEquipo"
+        android:layout_alignStart="@+id/TxvNroEquipo" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtNroCaja"
+        android:layout_weight="0.69"
+        android:hint="E - nro"
+        android:layout_below="@+id/EdtNroEquipo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/TxvNroEquipo"
+        android:layout_toEndOf="@+id/TxvNroEquipo" />
+
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:layout_margin="10dp"
+        android:text="@string/TxvNroEquipo"
+        android:id="@+id/TxvNroEquipo"
+        android:layout_below="@+id/EdtNroEquipo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtNroEquipo"
+        android:layout_weight="0.69"
+        android:hint="C - nro"
+        android:layout_toRightOf="@+id/TxvNroCaja"
+        android:layout_toEndOf="@+id/TxvNroCaja" />
+
+</RelativeLayout>

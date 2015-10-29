@@ -18,7 +18,7 @@ import com.gildder.invenbras.gestionactivos.R;
  * Created by gildder on 17/10/2015.
  */
 public class DialogoPersonalizado extends DialogFragment {
-    final String[] tipos = {"Computacion", "Telecomunicaciones","Red","Equipos","Materiales","Muebles"};
+
 
 
     @Override
@@ -28,15 +28,15 @@ public class DialogoPersonalizado extends DialogFragment {
 
 
         builder.setTitle("Tipo Activo")
-                .setItems(tipos,new DialogInterface.OnClickListener(){
+                .setItems(Arreglos.TIPO_ACTIVO,new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Log.i("Dialogo", "Opcion elegida " + tipos[id]);
+                        Log.i("Dialogo", "Opcion elegida " + Arreglos.TIPO_ACTIVO[id]);
 
                         Intent intent = new Intent(getActivity(), ActivoActivity.class);
                         intent.putExtra("ID",id + 1);
-                        intent.putExtra("NOMBRE",tipos[id].toString());
-                        Toast.makeText(getActivity(), tipos[id], Toast.LENGTH_SHORT).show();
+                        intent.putExtra("NOMBRE",Arreglos.TIPO_ACTIVO[id].toString());
+                        Toast.makeText(getActivity(), Arreglos.TIPO_ACTIVO[id], Toast.LENGTH_SHORT).show();
 
                         startActivity(intent);
 

@@ -10,6 +10,14 @@ public class Muebles extends Activo {
     private String nroMueble;
     private String color;
 
+    public static final String DB_TABLE =
+            "CREATE TABLE  mueble (" +
+                    "_idActivo INTEGER PRIMARY KEY," +
+                    "alto DECIMAL(10,2) NOT NULL," +
+                    "ancho DECIMAL(10,2) NOT NULL," +
+                    "profundidad DECIMAL(10,2) NOT NULL,"
+                    ;
+
     public Muebles(float alto, float ancho, float profundidad, String nroMueble, String color) {
         this.alto = alto;
         this.ancho = ancho;
