@@ -2,10 +2,12 @@ package com.gildder.invenbras.gestionactivos.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,20 +15,28 @@ import android.widget.Toast;
 
 import com.gildder.invenbras.gestionactivos.ListaActivoActivity;
 import com.gildder.invenbras.gestionactivos.R;
+import com.gildder.invenbras.gestionactivos.Utils.Util;
 import com.gildder.invenbras.gestionactivos.adapters.InventarioAdapter;
 import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
 import com.gildder.invenbras.gestionactivos.models.Inventario;
+
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Inventarios extends Fragment {
+    final ArrayList<Inventario> inventarios = new ArrayList<Inventario>();
 
     public Inventarios() {
-        // Required empty public constructor
-    }
 
+        TaskInventario tarea = new TaskInventario();
+        tarea.execute();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -37,56 +47,14 @@ public class Inventarios extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        final ArrayList<Inventario> inventarios = new ArrayList<Inventario>();
-
-        for (int i=0;i<10;i++) {
-            Inventario inventario = new Inventario();
-            inventario.setId(i);
-            inventario.setNombre("Inventario "+i);
-            inventario.setDescripcion("descripcion "+i);
-            inventario.setPrioridad((String.valueOf( new Random().nextInt(3)+1)));
-
-
-            inventarios.add(inventario);
-        }
-
-
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.RclInventario);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(new InventarioAdapter(getActivity(), inventarios, new RecyclerViewOnItemListener() {
-            @Override
-            public void onClick(View v, int position) {
-                Toast toast = Toast.makeText(getActivity(), inventarios.get(position).getNombre(), Toast.LENGTH_SHORT);
-                toast.show();
-
-                Intent intent = new Intent(getActivity(), ListaActivoActivity.class);
-                intent.putExtra("ID",inventarios.get(position).getId());
-                intent.putExtra("NOMBRE",inventarios.get(position).getNombre());
-
-                int cantidad = 0;
-                startActivityForResult(intent,cantidad);
-
-            }
-        }));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-   //     TaskInventario tarea = new TaskInventario();
-     //   tarea.execute();
-
     }
 
     /**
      * Clase Tarea
      */
-/*
-    public class TaskInventario extends AsyncTask<String,Integer,Boolean> {
-        private Inventario[] inventarios;
 
-        final static String METHOD_NAME = "ObtenerInventarioXml";
-        final static String SOAP_ACTION = "http://inventario.pre/ObtenerInventarioXml";
+    public class TaskInventario extends AsyncTask<String,Integer,Boolean> {
+        final static String SOAP_ACTION = Util.NAMESPACE + Util.METHOD_GET_INVENTARIO;
 
 
         @Override
@@ -94,7 +62,7 @@ public class Inventarios extends Fragment {
             boolean result = true;
 
             //modelo del request
-            SoapObject request = new SoapObject(Util.NAMESPACE,Util.URL);
+            SoapObject request = new SoapObject(Util.NAMESPACE, Util.METHOD_GET_INVENTARIO);
 
             //modelo envolepe
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -104,17 +72,19 @@ public class Inventarios extends Fragment {
             envelope.setOutputSoapObject(request);
 
             //modo de transporte
-            HttpTransportSE transportSE = new HttpTransportSE(Util.URL);
+            HttpTransportSE transportSE = new HttpTransportSE(Util.URL,60000);
 
             try {
                 transportSE.call(SOAP_ACTION, envelope);
 
                 SoapObject resSoap = (SoapObject) envelope.getResponse();
 
-                inventarios = new Inventario[resSoap.getPropertyCount()];
+                if (resSoap.getPropertyCount()<=0){
+                    result = false;
+                }
 
 
-                for (int i = 0; i<inventarios.length; i++){
+                for (int i = 0; i<resSoap.getPropertyCount(); i++){
                     SoapObject ic = (SoapObject) resSoap.getProperty(i);
 
                     Inventario inventario = new Inventario();
@@ -124,11 +94,12 @@ public class Inventarios extends Fragment {
                     inventario.setPrioridad(ic.getProperty(3).toString());
 
                     //añadimos a la lista de inventarios
-                    inventarios[i] = inventario;
+                    inventarios.add(inventario);
                 }
 
 
             }catch (Exception ex){
+                result = false;
                 Log.e("ERROR...", ex.getMessage());
             }
             return result;
@@ -138,28 +109,38 @@ public class Inventarios extends Fragment {
 
             if (result)
             {
-
-                ArrayList<Inventario> ListaInventarios = new ArrayList<Inventario>();
-
-                for (int i=0; i<inventarios.length; i++) {
-                    ListaInventarios.add(inventarios[i]);
-                }
+                Log.e("RESULT...", "Request con Exito!");
 
 
-                //llemamos el RecyclerView
                 RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.RclInventario);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setAdapter(new InventarioAdapter(ListaInventarios, R.layout.row_inventario));
+                recyclerView.setAdapter(new InventarioAdapter(getActivity(), inventarios, new RecyclerViewOnItemListener() {
+                    @Override
+                    public void onClick(View v, int position) {
+                        Toast toast = Toast.makeText(getActivity(), inventarios.get(position).getNombre(), Toast.LENGTH_SHORT);
+                        toast.show();
+
+                        Intent intent = new Intent(getActivity(), ListaActivoActivity.class);
+                        intent.putExtra("ID",inventarios.get(position).getId());
+                        intent.putExtra("NOMBRE",inventarios.get(position).getNombre());
+
+                        int cantidad = 0;
+                        startActivityForResult(intent,cantidad);
+
+                    }
+                }));
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
             }
             else
             {
-
+                Log.e("ERROR...", "Problema en la consulta");
             }
         }
 
 
     }//fin clase Task
-    */
+
 }

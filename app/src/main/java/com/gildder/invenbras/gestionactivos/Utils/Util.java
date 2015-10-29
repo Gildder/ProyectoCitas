@@ -6,7 +6,11 @@ package com.gildder.invenbras.gestionactivos.Utils;
 public class Util {
     //conexxion a Web Service
     public final static String NAMESPACE = "http://ibrasact.com.bo/";
-    public final static String URL = "http://192.168.56.1/InventarioWS/WebService.asmx";
+    public final static String URL = "http://192.168.42.48/InventarioWS/WebService.asmx?WSDL";
+
+    //metodos Soap
+    public final static String METHOD_GET_INVENTARIO = "ObtenerInventarioXml";
+    public final static String METHOD_VAL_USUARIO = "ValidarUsuario";
 
 
 /**

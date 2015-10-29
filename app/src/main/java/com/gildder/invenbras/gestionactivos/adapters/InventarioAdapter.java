@@ -42,6 +42,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<vhRowInventario> {
         this.recyclerViewOnItemListener = recyclerViewOnItemListener;
     }
 
+
     @Override
     public vhRowInventario onCreateViewHolder(ViewGroup viewGroup, final int position) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_inventario, viewGroup, false);

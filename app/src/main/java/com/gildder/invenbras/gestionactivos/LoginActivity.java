@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.gildder.invenbras.gestionactivos.Utils.Util;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -98,12 +100,7 @@ public class LoginActivity extends Activity {
      */
     public class TaskValidacionUsuario extends AsyncTask<String, Integer, Boolean> {
         boolean result = false;
-
-        String NAMESPACE = "http://ibrasact.com.bo/";
-        String URL = "http://192.168.42.48/InventarioWS/WebService.asmx";
-        //String URL = "http://192.168.42.48:1037/WebService.asmx";
-        String METHOD_NAME = "ValidarUsuario";
-        String SOAP_ACTION = "http://ibrasact.com.bo/ValidarUsuario";
+        private final String SOAP_ACTION = Util.NAMESPACE + Util.METHOD_VAL_USUARIO;
 
 
         @Override
@@ -124,7 +121,7 @@ public class LoginActivity extends Activity {
 
 
             //modelo del request
-            SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+            SoapObject request = new SoapObject(Util.NAMESPACE, Util.METHOD_VAL_USUARIO);
             request.addProperty("usuario",   params[0] );      //Paso de parametro
             request.addProperty("contrasenia",  params[1] );
 
@@ -134,8 +131,8 @@ public class LoginActivity extends Activity {
 
             envelope.setOutputSoapObject(request);
 
-            //modo de transporte
-            HttpTransportSE transport = new HttpTransportSE(URL,60000);
+            //modo de transporte con URL y Tiempo espera
+            HttpTransportSE transport = new HttpTransportSE(Util.URL,60000);
 
             try {
                 transport.call(SOAP_ACTION, envelope);
