@@ -1,4 +1,4 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.gildder.invenbras.gestionactivos.LoginActivity">
+    tools:context="com.gildder.invenbras.gestionactivos.views.LoginActivity">
 
 </menu>

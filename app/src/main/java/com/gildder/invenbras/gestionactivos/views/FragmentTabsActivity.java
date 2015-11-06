@@ -1,4 +1,4 @@
-package com.gildder.invenbras.gestionactivos;
+package com.gildder.invenbras.gestionactivos.views;
 
 import android.app.ActionBar;
 import android.app.ActionBar.TabListener;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gildder.invenbras.gestionactivos.R;
 import com.gildder.invenbras.gestionactivos.fragments.Inventarios;
 import com.gildder.invenbras.gestionactivos.fragments.Notificaciones;
 
@@ -61,7 +62,7 @@ public class FragmentTabsActivity extends Activity implements TabListener {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.actionCargarInventario) {
             return true;
         }
 

@@ -1,16 +1,14 @@
 package com.gildder.invenbras.gestionactivos.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gildder.invenbras.gestionactivos.ListaActivoActivity;
 import com.gildder.invenbras.gestionactivos.R;
-import com.gildder.invenbras.gestionactivos.models.Activo;
-import com.gildder.invenbras.gestionactivos.models.Inventario;
+import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
+import com.gildder.invenbras.gestionactivos.clases.Activo;
 
 import java.util.ArrayList;
 
@@ -18,36 +16,29 @@ import java.util.ArrayList;
  * Created by gildder on 15/10/2015.
  */
 public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
-    private ArrayList<Activo> listaActivos;
+    private ArrayList<Activo> activos;
     private int itemLayout;
     private Context context;
+    //interface definida en interfaces
+    private RecyclerViewOnItemListener recyclerViewOnItemListener;
 
-    public ActivoAdapter(Context context, ArrayList<Activo> listaActivos, int itemLayout) {
-        this.listaActivos = listaActivos;
-        this.itemLayout = itemLayout;
+    public ActivoAdapter(Context context, ArrayList<Activo> activos, RecyclerViewOnItemListener recyclerViewOnItemListener) {
+        this.activos = activos;
+        this.recyclerViewOnItemListener = recyclerViewOnItemListener;
         this.context = context;
     }
 
     @Override
     public vhRowActivo onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemLayout, viewGroup, false);
-        vhRowActivo holder = new vhRowActivo(v);
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ListaActivoActivity.class); //cambiar por la vista de del activo
-                context.startActivity(intent);
-            }
-        });
-
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_activo, viewGroup, false);
+        vhRowActivo holder = new vhRowActivo(v,recyclerViewOnItemListener);
 
         return holder;
     }
 
     @Override
     public void onBindViewHolder(vhRowActivo viewHolder, int position) {
-        Activo activo = listaActivos.get(position);
+        Activo activo = activos.get(position);
 
         viewHolder.itemView.setSelected(itemLayout == position);
         viewHolder.getLayoutPosition();
@@ -55,12 +46,37 @@ public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
         viewHolder.modelo.setText(activo.getModelo());
         viewHolder.marca.setText(activo.getMarca());
         viewHolder.serie.setText(activo.getSerie());
-        viewHolder.estado.setText(activo.getEstado());
-        viewHolder.tipo.setText(activo.getTipo());
+        switch (activo.getEstado()){
+            case "S":
+                viewHolder.estado.setBackgroundResource(R.drawable.estado_sin);
+                viewHolder.estado.setText("Revisar");
+
+                break;
+            case "N":
+                viewHolder.estado.setBackgroundResource(R.drawable.estado_no);
+                viewHolder.estado.setText("No funciona");
+
+                break;
+            case "F":
+                viewHolder.estado.setBackgroundResource(R.drawable.estado_fun);
+                viewHolder.estado.setText("Funciona");
+
+                break;
+        }
+        viewHolder.tipo.setText(activo.getModelo());
     }
 
     @Override
     public int getItemCount() {
-        return listaActivos.size();
+        return activos.size();
     }
+
+    /**
+     * Este metodo limpias la lista de activo
+     */
+    public void clearAdapter(){
+        activos.clear();
+        notifyDataSetChanged();
+    }
+
 }

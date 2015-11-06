@@ -1,4 +1,4 @@
-package com.gildder.invenbras.gestionactivos.models;
+package com.gildder.invenbras.gestionactivos.clases;
 
 /**
  * Created by gildder on 03/10/2015.
@@ -8,6 +8,7 @@ public class Inventario {
     private String nombre;
     private String descripcion;
     private String prioridad;
+    private String total;
 
     public Inventario() {
     }
@@ -17,6 +18,7 @@ public class Inventario {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.prioridad = prioridad;
+        this.total = "0";
     }
 
 
@@ -62,5 +64,14 @@ public class Inventario {
                 break;
         }
         this.prioridad = priori;
+    }
+
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
     }
 }

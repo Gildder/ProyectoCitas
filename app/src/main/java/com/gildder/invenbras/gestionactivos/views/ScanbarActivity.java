@@ -1,4 +1,4 @@
-package com.gildder.invenbras.gestionactivos;
+package com.gildder.invenbras.gestionactivos.views;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.covics.zxingscanner.OnDecodeCompletionListener;
 import com.covics.zxingscanner.ScannerView;
+import com.gildder.invenbras.gestionactivos.R;
 
 public class ScanbarActivity extends Activity implements OnDecodeCompletionListener {
     private ScannerView scannerView;

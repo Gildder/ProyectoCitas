@@ -1,4 +1,4 @@
-package com.gildder.invenbras.gestionactivos;
+package com.gildder.invenbras.gestionactivos.views;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,25 +11,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.gildder.invenbras.gestionactivos.R;
 import com.gildder.invenbras.gestionactivos.Utils.Util;
+import com.gildder.invenbras.gestionactivos.clases.Inventario;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -38,6 +36,8 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class LoginActivity extends Activity {
     private EditText etxUsuario;
@@ -47,6 +47,7 @@ public class LoginActivity extends Activity {
 
     private boolean isServidor = true;
     private boolean res = false;
+    boolean result = false;
 
     private TaskValidacionUsuario tarea;
 
@@ -99,9 +100,12 @@ public class LoginActivity extends Activity {
      * Clase Tarea
      */
     public class TaskValidacionUsuario extends AsyncTask<String, Integer, Boolean> {
-        boolean result = false;
-        private final String SOAP_ACTION = Util.NAMESPACE + Util.METHOD_VAL_USUARIO;
 
+        private final String SOAP_ACTION = Util.NAMESPACE + Util.METHOD_VAL_USUARIO;
+        private SoapPrimitive resSoap;
+        //Declaracion de variables para serealziar y deserealizar
+        //objetos y cadenas JSON
+        Gson gson ;
 
         @Override
         protected void onPreExecute() {
@@ -137,9 +141,14 @@ public class LoginActivity extends Activity {
             try {
                 transport.call(SOAP_ACTION, envelope);
 
-                SoapPrimitive resSoap = (SoapPrimitive) envelope.getResponse();
+                resSoap = (SoapPrimitive) envelope.getResponse();
 
-                result = Boolean.parseBoolean(resSoap.toString());
+                if (resSoap.toString().equals("vacio")){
+                    result = false;
+                }else {
+
+                    result = true;
+                }
 
             } catch (IOException ex) {
                 isServidor = false;
@@ -155,21 +164,46 @@ public class LoginActivity extends Activity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            pgdProceso.dismiss();
+            JSONArray jArray = new JSONArray();
 
             if (result) {
-                //usuario correcto guardamos los datos
-                SharedPreferences settings = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString("usuario", etxUsuario.getText().toString());
-                editor.putString("contrasenia", etxContrasenia.getText().toString());
 
-                //confirmamos el almacenamiento
-                editor.commit();
+                String responseJSON = resSoap.toString();
+                try {
+                    jArray = new JSONArray(responseJSON);
 
+
+
+                    //usuario correcto guardamos los datos
+                    SharedPreferences usuarioPrefs = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = usuarioPrefs.edit();
+                    editor.putString("id", jArray.getJSONObject(0).getString("Id"));
+                    editor.putString("persona", jArray.getJSONObject(0).getString("Persona"));
+                    editor.putString("usuario", jArray.getJSONObject(0).getString("Usuario"));
+                    editor.putString("empleado_id", jArray.getJSONObject(0).getString("Empleado_id"));
+                    editor.putString("persona_id", jArray.getJSONObject(0).getString("Persona_id"));
+                    editor.putString("almacen_id", jArray.getJSONObject(0).getString("Almacen_id"));
+                    editor.putString("contrasenia", etxContrasenia.getText().toString());
+
+                    //confirmamos el almacenamiento
+                    editor.commit();
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    Log.e("ERROR:", "No se pudo guardar en Preferencias");
+                }
+
+                Intent intent = new Intent(LoginActivity.this, FragmentTabsActivity.class);
+                try {
+                    intent.putExtra("ID_ALMACEN",jArray.getJSONObject(0).getString("Almacen_id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 //paso al otro activity
-                startActivity(new Intent(LoginActivity.this, FragmentTabsActivity.class));
+                startActivity(intent);
 
                 finish();
             } else {
@@ -179,7 +213,11 @@ public class LoginActivity extends Activity {
                 else
                     txvMensaje.setText("Usuario o contraseña incorrectos");
             }
+
+            pgdProceso.dismiss();
         }
+
+
 
     }//fin clase Task
 
@@ -208,6 +246,12 @@ public class LoginActivity extends Activity {
         toast.setView(layout);
         toast.show();
     }
+
+    /**
+     * Metodo que recibe una cadena JSON y la convierte en una lista
+     * de objetos AndroidOS para despues cargarlos en la lista
+     * @param strJson (String) Cadena JSON
+     */
 
 
 }

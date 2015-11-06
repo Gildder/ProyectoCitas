@@ -1,4 +1,4 @@
-package com.gildder.invenbras.gestionactivos.models;
+package com.gildder.invenbras.gestionactivos.clases;
 
 /**
  * Created by gildder on 15/10/2015.

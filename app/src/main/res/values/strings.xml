@@ -2,6 +2,7 @@
     <string name="app_name">iBrasAct</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_actualizar">Actualizar</string>
 
     <!-- Mensajes bienvenida-->
     <string name="TextoBienvenida">Los inventarios mas valiosos</string>
@@ -35,17 +36,17 @@
     <string name="action_activos">Tipo Activo</string>
     <string name="action_guardar">Guardar</string>
 
-    <!-- Layout Caja Fuerte-->
+    <!-- Layout Caja Fuertes-->
     <string name="TxvAlto">Alto:</string>
     <string name="TxvAncho">Ancho:</string>
     <string name="TxvProfundidad">Profundidad:</string>
     <string name="TxtHint">00.00</string>
 
-    <!-- Layout Computacion-->
+    <!-- Layout Computaciones-->
     <string name="TxvNroCaja">Nro. Caja:</string>
     <string name="TxvNroEquipo">Nro. Equipo:</string>
 
-    <!-- Layout Extintor-->
+    <!-- Layout Extintores-->
     <string name="TxvCodigo">Codigo:</string>
     <string name="TxvNumero">Numero:</string>
     <string name="TxvContenido">Contenido:</string>

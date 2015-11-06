@@ -30,7 +30,10 @@
     <color name="colorRed">#ea4717</color>
     <color name="colorRedDark">#D50000</color>
 
-
+    <!-- Colores comunes-->
+    <color name="colorStateSin">#a8a9ac</color>
+    <color name="colorStateNo">#ffa114</color>
+    <color name="colorStateFun">#16adff</color>
 
 
 

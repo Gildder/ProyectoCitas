@@ -4,10 +4,28 @@
     android:layout_height="match_parent"
     tools:context="com.gildder.invenbras.gestionactivos.fragments.Inventarios">
 
+
+
     <android.support.v7.widget.RecyclerView
         android:scrollbars="vertical"
         android:id="@+id/RclInventario"
         android:layout_width ="match_parent"
         android:layout_height="match_parent"/>
+
+    <ImageButton
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:id="@+id/ImbSyncInventario"
+        android:elevation="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_action_sync"
+        android:background="@drawable/btn_circle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right|bottom"
+        />
+
 
 </FrameLayout>

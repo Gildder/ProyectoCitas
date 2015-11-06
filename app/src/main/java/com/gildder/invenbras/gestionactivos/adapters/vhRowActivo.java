@@ -9,9 +9,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gildder.invenbras.gestionactivos.R;
+import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
 
 /**
- * Esta clase relacion los view del Xml row_inventario
+ * Esta clase relacion los view del Xml row_activo
  *
  * Created by gildder on 15/10/2015.
  */
@@ -25,7 +26,7 @@ public class vhRowActivo extends RecyclerView.ViewHolder {
     protected LinearLayout linearLayout;
     protected CardView cardView;
 
-    public vhRowActivo(View itemView) {
+    public vhRowActivo(View itemView, RecyclerViewOnItemListener recyclerViewOnItemListener) {
         super(itemView);
 
         this.modelo = (TextView) itemView.findViewById(R.id.TxvModeloA);

@@ -1,17 +1,14 @@
 package com.gildder.invenbras.gestionactivos.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.gildder.invenbras.gestionactivos.ListaActivoActivity;
 import com.gildder.invenbras.gestionactivos.R;
 import com.gildder.invenbras.gestionactivos.interfaces.RecyclerViewOnItemListener;
-import com.gildder.invenbras.gestionactivos.models.Inventario;
+import com.gildder.invenbras.gestionactivos.clases.Inventario;
 
 import java.util.ArrayList;
 
@@ -24,7 +21,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<vhRowInventario> {
     private int itemLayout;
     private Context context;
 
-    //interface defini en interfaces
+    //interface definida en interfaces
     private RecyclerViewOnItemListener recyclerViewOnItemListener;
 
 
@@ -75,7 +72,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<vhRowInventario> {
         }
         viewHolder.prioridad.setText(inventario.getPrioridad());
 
-
+        viewHolder.nro.setText(inventario.getTotal());
 
     }
 
