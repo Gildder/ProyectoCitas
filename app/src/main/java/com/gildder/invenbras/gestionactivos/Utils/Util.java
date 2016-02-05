@@ -11,7 +11,7 @@ public class Util {
     //metodos Soap
     public final static String METHOD_GET_INVENTARIO = "ObtenerInventarioXml";
     public final static String METHOD_GET_UBICACION = "ObtenerUbicacionXml";
-    public final static String METHOD_GET_TIPOACTIVO = "ObtenerTipoActivoXml";
+    public final static String METHOD_GET_TIPOACTIVO = "ObtenerTipoActivoJson";
     public final static String METHOD_GET_ACTIVO = "ObtenerActivoXml";
     public final static String METHOD_VAL_USUARIO = "ValidarUsuario";
 

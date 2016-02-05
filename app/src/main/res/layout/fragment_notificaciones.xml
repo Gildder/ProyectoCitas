@@ -3,9 +3,10 @@
     android:layout_height="match_parent"
     tools:context="com.gildder.invenbras.gestionactivos.fragments.Notificaciones">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:background="@color/colorAccent4"/>
+    <android.support.v7.widget.RecyclerView
+        android:scrollbars="vertical"
+        android:id="@+id/RclNotificacion"
+        android:layout_width ="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="229dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
     android:id="@+id/LntCodigos"
@@ -123,6 +123,25 @@
             android:background="@drawable/btn_rect"
             android:src="@drawable/ic_action_barcode"
             android:id="@+id/BtnCodGer" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LntOtroCod"
+        android:layout_marginTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/EdtOtroCod"
+            android:layout_weight="0.73"
+            android:hint="Otro " />
+
+
     </LinearLayout>
 
 </LinearLayout>

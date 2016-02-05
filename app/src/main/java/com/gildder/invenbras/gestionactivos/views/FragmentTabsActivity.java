@@ -22,7 +22,7 @@ public class FragmentTabsActivity extends Activity implements TabListener {
      */
     private Fragment[] fragments = new  Fragment[]{
             new Inventarios(),
-            new Notificaciones()
+           // new Notificaciones()
     };
 
 
@@ -101,6 +101,6 @@ public class FragmentTabsActivity extends Activity implements TabListener {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         actionBar.addTab(actionBar.newTab().setText("Inventarios").setTabListener(this).setIcon(R.drawable.ic_action_inventario));
-        actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this).setIcon(R.drawable.ic_action_notificacion));
+       // actionBar.addTab(actionBar.newTab().setText("Notificaciones").setTabListener(this).setIcon(R.drawable.ic_action_notificacion));
     }
 }

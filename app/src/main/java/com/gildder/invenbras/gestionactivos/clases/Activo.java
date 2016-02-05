@@ -31,7 +31,7 @@ public class Activo implements Serializable{
     private String codigoGER;    //codigo Grencia
     private String otroCodigo;
     private String imagen;
-    private String Observacion;
+    private String observacion;
     private int idTipo;
     private int idEmpleado;
     private int idUbicacion;
@@ -39,9 +39,42 @@ public class Activo implements Serializable{
 
     /* Contructores */
     public Activo() {
+        this.descripcion = "ninguno";
+        this.marca = "ninguno";
+        this.modelo = "ninguno";
+        this.serie = "ninguno";
+        this.estado = "S";
+        this.color = "ninguno";
+        this.alto = 0;
+        this.ancho = 0;
+        this.profundidad = 0;
+        this.contenido = "ninguno";
+        this.peso = 0;
+        this.nro = "ninguno";
+        this.fechaMantenimiento = "ninguno";
+        this.unidad = "ninguno";
+        this.cantidad = 1;
+        this.material = "ninguno";
+        this.codigoTIC = "ninguno";
+        this.codigoPAT = "ninguno";
+        this.codigoAF = "ninguno";
+        this.codigoGER = "ninguno";
+        this.otroCodigo = "ninguno";
+        this.imagen = "ninguno";
+        this.observacion = "ninguno";
+        this.idTipo = 0;
+        this.idEmpleado = 0;
+        this.idUbicacion = 0;
+        this.idInventario = 0;
     }
 
-    public Activo(int id, String descripcion, String marca, String modelo, String serie, String estado, String color, float alto, float ancho, float profundidad, String contenido, float peso, String nro, String fechaMantenimiento, String unidad, int cantidad, String material, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo, String imagen, String observacion, int idTipo, int idEmpleado, int idUbicacion, int idInventario) {
+
+
+
+    public Activo(int id, String descripcion, String marca, String modelo, String serie, String estado, String color, float alto,
+                  float ancho, float profundidad, String contenido, float peso, String nro, String fechaMantenimiento, String unidad, int cantidad,
+                  String material, String codigoTIC, String codigoPAT, String codigoAF, String codigoGER, String otroCodigo,
+                  String imagen, String observacion, int idTipo, int idEmpleado, int idUbicacion, int idInventario) {
         this.id = id;
         this.descripcion = descripcion;
         this.marca = marca;
@@ -65,11 +98,43 @@ public class Activo implements Serializable{
         this.codigoGER = codigoGER;
         this.otroCodigo = otroCodigo;
         this.imagen = imagen;
-        this.Observacion = observacion;
+        this.observacion = observacion;
         this.idTipo = idTipo;
         this.idEmpleado = idEmpleado;
         this.idUbicacion = idUbicacion;
         this.idInventario = idInventario;
+    }
+
+    public Activo(Activo activo){
+        this.id = activo.id;
+        this.descripcion = activo.descripcion;
+        this.marca = activo.marca;
+        this.modelo = activo.modelo;
+        this.serie = activo.serie;
+        this.estado = activo.estado;
+        this.color = activo.color;
+        this.alto = activo.alto;
+        this.ancho = activo.ancho;
+        this.profundidad = activo.profundidad;
+        this.contenido = activo.contenido;
+        this.peso = activo.peso;
+        this.nro = activo.nro;
+        this.fechaMantenimiento = activo.fechaMantenimiento;
+        this.unidad = activo.unidad;
+        this.cantidad = activo.cantidad;
+        this.material = activo.material;
+        this.codigoTIC = activo.codigoTIC;
+        this.codigoPAT = activo.codigoPAT;
+        this.codigoAF = activo.codigoAF;
+        this.codigoGER = activo.codigoGER;
+        this.otroCodigo = activo.otroCodigo;
+        this.imagen = activo.observacion;
+        this.observacion = activo.imagen;
+        this.idTipo = activo.idTipo;
+        this.idEmpleado = activo.idEmpleado;
+        this.idUbicacion = activo.idUbicacion;
+        this.idInventario = activo.idInventario;
+
     }
 
     /*  Getter y Setter */
@@ -259,11 +324,11 @@ public class Activo implements Serializable{
     }
 
     public String getObservacion() {
-        return Observacion;
+        return observacion;
     }
 
     public void setObservacion(String observacion) {
-        Observacion = observacion;
+        this.observacion = observacion;
     }
 
     public int getIdTipo() {

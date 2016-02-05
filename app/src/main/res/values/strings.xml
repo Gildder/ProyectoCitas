@@ -37,14 +37,16 @@
     <string name="action_guardar">Guardar</string>
 
     <!-- Layout Caja Fuertes-->
-    <string name="TxvAlto">Alto:</string>
-    <string name="TxvAncho">Ancho:</string>
-    <string name="TxvProfundidad">Profundidad:</string>
-    <string name="TxtHint">00.00</string>
+    <string name="TxvColor">Color</string>
+    <string name="TxvAlto">Alto</string>
+    <string name="TxvAncho">Ancho</string>
+    <string name="TxvProfundidad">Profundidad</string>
+    <string name="TxtHint">10 cm</string>
 
     <!-- Layout Computaciones-->
-    <string name="TxvNroCaja">Nro. Caja:</string>
-    <string name="TxvNroEquipo">Nro. Equipo:</string>
+    <string name="TxvUnidad">Unidad:</string>
+    <string name="TxvCantidad">Cantidad:</string>
+    <string name="TxvMaterial">Material:</string>
 
     <!-- Layout Extintores-->
     <string name="TxvCodigo">Codigo:</string>
@@ -52,6 +54,8 @@
     <string name="TxvContenido">Contenido:</string>
     <string name="TxvPeso">Peso:</string>
     <string name="TxvFecha">Renovar:</string>
+    <string name="alert_dialog_ok">Aceptar</string>
+    <string name="alert_dialog_cancel">Cancelar</string>
 
 
 </resources>

@@ -51,8 +51,8 @@ public class CInventario {
 
 
     public Long Insertar(String id, String nombre, String descripcion, String prioridad) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (!Existe(id)){
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(_id,id);
             values.put(_nombre,nombre);
@@ -62,6 +62,7 @@ public class CInventario {
             Long resultID = db.insert(_Tabla, null, values);
 
             Log.i("INF:", "Se adiciono correctamente el inventario "+ id);
+            db.close();
 
             return resultID;
         }else{
@@ -84,19 +85,18 @@ public class CInventario {
 
             Long resultID = db.insert(_Tabla, null, values);
 
-            Log.i("INF:", "Se adiciono correctamente el inventario " + inventario.getId());
-
+            Log.i("INF:", "Se inserto correctamente el inventario " + inventario.getId());
+            db.close();
             return resultID;
         }else{
-            Log.i("INF:", "EXISTE NO Se adiciono correctamente el inventario "+ inventario.getId());
+            Log.e("ERROR:", "No se inserto correctamente porque el inventario ya existe" + inventario.getId());
 
             return (long) -1;
         }
     }
 
     public Long Actualizar(Inventario inventario) {
-
-     //   if (!Existe((String.valueOf(inventario.getId())))){
+        if (Existe((String.valueOf(inventario.getId())))){
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
@@ -106,22 +106,30 @@ public class CInventario {
 
             Long resultID = (long) db.update(_Tabla, values, "id=?", new String[]{String.valueOf(inventario.getId())});
 
-            Log.i("INF:", "Se adiciono correctamente el inventario " + inventario.getId());
+            Log.i("INF:", "Se Actualizo correctamente el inventario " + inventario.getId());
+            db.close();
 
             return resultID;
-    //    }else{
-     //       Log.i("INF:", "NO Se adiciono correctamente el inventario "+ inventario.getId());
+        }else{
+            Log.e("ERROR:", "No se actualizo correctamente porque el inventario No existeo " + inventario.getId());
 
-     //       return (long) -1;
-     //   }
+            return (long) -1;
+        }
     }
 
     public Long Eliminar(int id)
     {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Long resultID = (long) db.delete(_Tabla,  _id + "=?", new String[]{String.valueOf(id)});
+        if (Existe((String.valueOf(id)))){
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = (long) db.delete(_Tabla,  _id + "=?", new String[]{String.valueOf(id)});
+            db.close();
 
-        return resultID;
+            return resultID;
+        }else{
+            Log.e("ERROR:", "No se elimino correctamente porque el inventario No existe " + id);
+
+            return (long) -1;
+        }
     }
 
 
@@ -143,6 +151,7 @@ public class CInventario {
         }
 
         cursor.close();
+        db.close();
 
         Log.i("INF:", "Se obtubo el inventario " + id);
         return  inventario;
@@ -170,8 +179,10 @@ public class CInventario {
         }
 
         cursor.close();
+        db.close();
 
         Log.i("INF:", "Se obtuvo todos los inventario ");
+        db.close();
 
         return  listaInventarios;
     }
@@ -182,6 +193,8 @@ public class CInventario {
         if(db != null) {
             count = (int) DatabaseUtils.queryNumEntries(db, _Tabla);
         }
+        db.close();
+
         return count;
     }
 
@@ -190,14 +203,16 @@ public class CInventario {
         boolean result = false;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        if(db != null && Count()>0) {
-            Cursor cursor = db.query(_Tabla, new String[]{_id, _nombre, _descripcion, _prioridad},
+        if(db != null) {
+            Cursor cursor = db.query(_Tabla, null,
                     _id + "=?",new String[]{id}, null, null, null);
             result = (cursor.getCount() > 0);
             cursor.close();
 
             Log.i("INF:", "El inventario " + id + "Ya existe");
         }
+        db.close();
+
         return result;
     }
 

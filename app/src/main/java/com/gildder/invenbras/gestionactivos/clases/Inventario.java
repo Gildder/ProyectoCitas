@@ -53,14 +53,14 @@ public class Inventario {
     public void setPrioridad(String prioridad) {
         String priori="X";
         switch (prioridad){
+            case "0":
+                priori = "Alta";
+                break;
             case "1":
-                priori = "B";
+                priori = "Media";
                 break;
             case "2":
-                priori = "M";
-                break;
-            case "3":
-                priori = "A";
+                priori = "Baja";
                 break;
         }
         this.prioridad = priori;

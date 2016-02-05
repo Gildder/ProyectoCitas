@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#303F9F"
+    android:minHeight="?attr/actionBarSize"
+    android:id="@+id/TlbMenu"
+    tools:showIn="@layout/activity_activo">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/LntMenu">
+
+        <ImageView
+            android:id="@+id/ic_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_discard_pressed"
+            android:layout_alignBottom="@+id/TxvGuardarActivo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/TxvTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/TxvGuardarActivo"
+            android:layout_toRightOf="@+id/ic_logo"
+            android:layout_toEndOf="@+id/ic_logo" />
+
+        <ImageView
+            android:id="@+id/btnGuardar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_done_pressed"
+            android:layout_alignBottom="@+id/TxvGuardarActivo"
+            android:layout_toLeftOf="@+id/TxvGuardarActivo"
+            android:layout_toStartOf="@+id/TxvGuardarActivo" />
+
+        <TextView
+            android:id="@+id/TxvGuardarActivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="20dp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.Toolbar>

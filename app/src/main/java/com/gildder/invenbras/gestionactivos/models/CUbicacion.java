@@ -52,21 +52,23 @@ public class CUbicacion {
 
 
     public Long Insertar(Ubicacion ubicacion) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (!Existe(String.valueOf(ubicacion.getId()))){
+
             ContentValues values = new ContentValues();
             values.put(_id,ubicacion.getId());
             values.put(_sector,ubicacion.getSector());
             values.put(_area,ubicacion.getArea());
             values.put(_lugar, ubicacion.getLugar());
 
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
             Long resultID = db.insert(_Tabla, null, values);
+            db.close();
 
-            Log.i("INF:", "Se adiciono correctamente el ubicacion " + ubicacion.getId());
+            Log.i("INF:", "Se inserto correctamente el ubicacion " + ubicacion.getId());
 
             return resultID;
         }else{
-            Log.i("INF:", "NO Se adiciono correctamente el ubicacion "+ ubicacion.getId());
+            Log.e("ERROR:", "No se inserto correctamente el ubicacion porque ya existe "+ ubicacion.getId());
 
             return (long) -1;
         }
@@ -75,21 +77,22 @@ public class CUbicacion {
 
     public Long Actualizar(Ubicacion ubicacion) {
 
-        if (!Existe((String.valueOf(ubicacion.getId())))){
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+        if (Existe((String.valueOf(ubicacion.getId())))){
 
             ContentValues values = new ContentValues();
             values.put(_sector,ubicacion.getSector());
             values.put(_area,ubicacion.getArea());
             values.put(_lugar, ubicacion.getLugar());
 
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
             Long resultID = (long) db.update(_Tabla, values, "id=?", new String[]{String.valueOf(ubicacion.getId())});
+            db.close();
 
-            Log.i("INF:", "Se adiciono correctamente el ubicacion " + ubicacion.getId());
+            Log.i("INF:", "Se actualizo correctamente la ubicacion " + ubicacion.getId());
 
             return resultID;
         }else{
-            Log.i("INF:", "NO Se adiciono correctamente el ubicacion "+ ubicacion.getId());
+            Log.e("ERROR:", "No se actualizo correctamente la ubicacion por No Existe. " + ubicacion.getId());
 
             return (long) -1;
         }
@@ -97,15 +100,24 @@ public class CUbicacion {
 
     public Long Eliminar(int id)
     {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Long resultID = (long) db.delete(_Tabla,  _id + "=?", new String[]{String.valueOf(id)});
+        if (Existe((String.valueOf(id)))){
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = (long) db.delete(_Tabla,  _id + "=?", new String[]{String.valueOf(id)});
+            db.close();
 
-        return resultID;
+            Log.i("INF:", "Se elimino correctamente la ubicacion. " + id);
+            return resultID;
+        }else{
+            Log.e("ERROR:", "No se elimino correctamente la ubicacion por No Existe. " + id);
+
+            return (long) -1;
+        }
     }
 
 
 
     public Ubicacion Get(String id){
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(_Tabla, new String[]{_id, _sector, _area, _lugar},
                 _id + "=?",
@@ -122,6 +134,7 @@ public class CUbicacion {
         }
 
         cursor.close();
+        db.close();
 
         Log.e("INF:", "Se obtubo el inventario " + id);
         return  ubicacion;
@@ -149,6 +162,7 @@ public class CUbicacion {
         }
 
         cursor.close();
+        db.close();
 
         Log.i("INF:", "Se obtuvo todos los ubicacion ");
 
@@ -161,6 +175,8 @@ public class CUbicacion {
         if(db != null) {
             count = (int) DatabaseUtils.queryNumEntries(db, _Tabla);
         }
+        db.close();
+
         return count;
     }
 
@@ -169,14 +185,16 @@ public class CUbicacion {
         boolean result = false;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        if(db != null && Count()>0) {
-            Cursor cursor = db.query(_Tabla, new String[]{_id,  _sector, _area, _lugar},
+        if(db != null) {
+            Cursor cursor = db.query(_Tabla, null,
                     _id + "=?",new String[]{id}, null, null, null);
             result = (cursor.getCount() > 0);
-            cursor.close();
 
+            cursor.close();
             Log.i("INF:", "El ubicacion " + id + "Ya existe");
         }
+        db.close();
+
         return result;
     }
 

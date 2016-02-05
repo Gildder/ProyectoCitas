@@ -2,8 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="10dp"
+    android:layout_height="wrap_content"
     tools:showIn="@layout/activity_activo">
+
+
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:text="@string/TxvColor"
+        android:id="@+id/TxvColor"
+        android:layout_margin="10dp"
+        android:layout_alignBottom="@+id/EdtColor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <TextView
@@ -13,10 +25,9 @@
         android:text="@string/TxvAlto"
         android:id="@+id/TxvAlto"
         android:layout_margin="10dp"
-        android:layout_alignBottom="@+id/EdtAlto"
+        android:layout_below="@+id/EdtColor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
 
     <TextView
         android:layout_width="@dimen/TxvCampos"
@@ -25,7 +36,6 @@
         android:text="@string/TxvAncho"
         android:id="@+id/TxvAncho"
         android:layout_margin="10dp"
-
         android:layout_below="@+id/EdtAlto"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -41,18 +51,29 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginRight="10dp"
+        android:hint="Ninguno"
+        android:id="@+id/EdtColor"
+        android:completionThreshold="3"
+        android:layout_toRightOf="@+id/TxvAlto"/>
+
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/TxtHint"
         android:id="@+id/EdtAlto"
-        android:layout_toRightOf="@+id/TxvAlto"
-        android:layout_toLeftOf="@+id/SpnUnidadAlto"
-        android:layout_toStartOf="@+id/SpnUnidadAlto" />
+        android:layout_below="@+id/EdtColor"
+        android:layout_alignLeft="@+id/EdtColor"
+        android:layout_alignStart="@+id/EdtColor"
+        android:layout_marginRight="10dp" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:hint="@string/TxtHint"
@@ -60,8 +81,7 @@
         android:layout_below="@+id/EdtAlto"
         android:layout_alignLeft="@+id/EdtAlto"
         android:layout_alignStart="@+id/EdtAlto"
-        android:layout_toLeftOf="@+id/SpnUnidadAncho"
-        android:layout_toStartOf="@+id/SpnUnidadAncho" />
+        android:layout_marginRight="10dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -77,32 +97,6 @@
         android:layout_alignEnd="@+id/EdtAncho" />
 
 
-    <Spinner
-        android:layout_width="@dimen/SpnCamposWight"
-        android:layout_height="@dimen/SpnCamposHeight"
-        android:id="@+id/SpnUnidadAlto"
-        style="@style/Body_1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/EdtProfundidad" />
-
-    <Spinner
-        android:layout_width="@dimen/SpnCamposWight"
-        android:layout_height="@dimen/SpnCamposHeight"
-        android:id="@+id/SpnUnidadAncho"
-        style="@style/Body_1"
-        android:layout_alignTop="@+id/EdtAncho"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-    <Spinner
-        android:layout_width="@dimen/SpnCamposWight"
-        android:layout_height="@dimen/SpnCamposHeight"
-        android:id="@+id/SpnUnidadProfundidad"
-        style="@style/Body_1"
-        android:layout_alignTop="@+id/EdtProfundidad"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

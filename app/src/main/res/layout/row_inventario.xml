@@ -71,7 +71,9 @@
             android:layout_below="@+id/linea"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            style="@style/BotonSuccess" />
+            style="@style/BotonSuccess"
+            android:layout_alignRight="@+id/TxvModelo"
+            android:layout_alignEnd="@+id/TxvModelo" />
 
         <TextView
             android:layout_width="wrap_content"

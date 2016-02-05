@@ -126,8 +126,8 @@ public class LoginActivity extends Activity {
 
             //modelo del request
             SoapObject request = new SoapObject(Util.NAMESPACE, Util.METHOD_VAL_USUARIO);
-            request.addProperty("usuario",   params[0] );      //Paso de parametro
-            request.addProperty("contrasenia",  params[1] );
+            request.addProperty("pUsuario",   params[0].toString() );      //Paso de parametro
+            request.addProperty("contrasenia",  params[1].toString() );
 
             //modelo envolepe
             SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -136,7 +136,7 @@ public class LoginActivity extends Activity {
             envelope.setOutputSoapObject(request);
 
             //modo de transporte con URL y Tiempo espera
-            HttpTransportSE transport = new HttpTransportSE(Util.URL,60000);
+            HttpTransportSE transport = new HttpTransportSE(Util.URL);
 
             try {
                 transport.call(SOAP_ACTION, envelope);
@@ -168,9 +168,8 @@ public class LoginActivity extends Activity {
 
             if (result) {
 
-                String responseJSON = resSoap.toString();
                 try {
-                    jArray = new JSONArray(responseJSON);
+                    jArray = new JSONArray(resSoap.toString());
 
 
 

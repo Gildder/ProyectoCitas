@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.gildder.invenbras.gestionactivos.clases.Activo;
 
@@ -62,7 +63,8 @@ public class CActivo{
 
 
     public Long Insertar(Activo activo) {
-        if (!Existe(activo.getSerie())){
+        if (!ExisteSerie(activo.getSerie())){
+
             ContentValues values = new ContentValues();
             values.put(_descripcion,activo.getDescripcion());
             values.put(_marca,activo.getMarca());
@@ -90,29 +92,44 @@ public class CActivo{
             values.put(_TipoActivo_id,activo.getIdTipo());
             values.put(_Empleado_id,activo.getIdEmpleado());
             values.put(_Ubicacion_id,activo.getIdUbicacion());
-            values.put(_Inventario_id,activo.getIdInventario());
+            values.put(_Inventario_id, activo.getIdInventario());
 
-            Long resultID = dbHelper.getWritableDatabase().insert(_Tabla, null, values);
-            dbHelper.close();
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = db.insert(_Tabla, null, values);
+            db.close();
 
+            Log.i("INF:", "Se inserto correctamente el ubicacion " + activo.getId());
             return resultID;
         }else{
+            Log.e("ERROR:", "No se inserto correctamente el activo porque ya existe "+ activo.getId());
+
             return (long) -1;
         }
     }
 
     public Long Actualizar(int id, byte[] imagen){
-        ContentValues values = new ContentValues();
-        values.put(_imagen, imagen);
+        if (Existe((String.valueOf(id)))){
 
-        Long resultID = (long)dbHelper.getWritableDatabase().update(_Tabla, values, _id + "=?", new String[]{String.valueOf(id)});
-        dbHelper.close();
+            ContentValues values = new ContentValues();
+            values.put(_imagen, imagen);
 
-        return resultID;
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = (long)db.update(_Tabla, values, _id + "=?", new String[]{String.valueOf(id)});
+            db.close();
+
+            Log.i("INF:", "Se actualizo correctamente el activo " + id);
+
+            return resultID;
+        }else{
+            Log.e("ERROR:", "No se actualizo correctamente la ubicacion por No Existe. " + id);
+
+            return (long) -1;
+        }
     }
 
     public Long Actualizar(Activo activo) {
 
+        if (Existe((String.valueOf(activo.getId())))){
             ContentValues values = new ContentValues();
             values.put(_descripcion,activo.getDescripcion());
             values.put(_marca,activo.getMarca());
@@ -135,32 +152,47 @@ public class CActivo{
             values.put(_codigoAF,activo.getCodigoAF());
             values.put(_codigoGER,activo.getCodigoGER());
             values.put(_otroCodigo,activo.getOtroCodigo());
-            values.put(_imagen,activo.getImagen());
+            values.put(_imagen, activo.getImagen());
             values.put(_Observacion,activo.getObservacion());
             values.put(_TipoActivo_id,activo.getIdTipo());
             values.put(_Empleado_id,activo.getIdEmpleado());
             values.put(_Ubicacion_id,activo.getIdUbicacion());
             values.put(_Inventario_id,activo.getIdUbicacion());
 
-            Long resultID = (long)dbHelper.getWritableDatabase().update(_Tabla, values, _id + "=?", new String[]{String.valueOf(activo.getId())});
-
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = (long)db.update(_Tabla, values, _id + "=?", new String[]{String.valueOf(activo.getId())});
+            db.close();
 
             return resultID;
+        }else{
+            Log.e("ERROR:", "No se actualizo correctamente la ubicacion por No Existe. " + activo.getId());
 
+            return (long) -1;
+        }
     }
 
 
     public Long Eliminar(int id) {
-        Long resultID = (long) dbHelper.getWritableDatabase().delete(_Tabla,  _id + "=?", new String[]{String.valueOf(id)});
-        dbHelper.close();
+        if (Existe((String.valueOf(id)))){
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Long resultID = (long) db.delete(_Tabla, _id + "=?", new String[]{String.valueOf(id)});
+            db.close();
 
-        return resultID;
+            Log.e("INF:", "Se elimino correctamente el activo. " + id);
+
+            return resultID;
+        }else{
+            Log.e("ERROR:", "No se elimino correctamente el activo por No Existe. " + id);
+
+            return (long) -1;
+        }
     }
 
 
 
     public Activo Get(String serie){
-        Cursor cursor = dbHelper.getReadableDatabase().query(_Tabla, new String[] {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(_Tabla, new String[] {
                         _id, _descripcion, _marca,  _modelo,_serie, _estado,
                         _color, _alto, _ancho, _profundidad, _contenido, _peso, _nro, _fechaMantenimiento, _unidad, _cantidad, _material,
                         _codigoTIC, _codigoPAT, _codigoAF, _codigoGER, _otroCodigo, _Observacion, _imagen,
@@ -204,11 +236,14 @@ public class CActivo{
         }
 
         cursor.close();
+        db.close();
+
         return  activo;
     }
 
     public Activo Get(int id){
-        Cursor cursor = dbHelper.getReadableDatabase().query(_Tabla, new String[] {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(_Tabla, new String[] {
                         _id, _descripcion, _marca,  _modelo,_serie, _estado,
                         _color, _alto, _ancho, _profundidad, _contenido, _peso, _nro, _fechaMantenimiento, _unidad, _cantidad, _material,
                         _codigoTIC, _codigoPAT, _codigoAF, _codigoGER, _otroCodigo, _Observacion, _imagen,
@@ -252,6 +287,7 @@ public class CActivo{
         }
 
         cursor.close();
+        db.close();
 
         return  activo;
     }
@@ -260,6 +296,7 @@ public class CActivo{
     public ArrayList<Activo> GetAll(){
         ArrayList<Activo> listaActivos = new ArrayList<>();
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = dbHelper.getReadableDatabase().query(_Tabla, new String[] {
                         _id, _descripcion, _marca,  _modelo,_serie, _estado,
                         _color, _alto, _ancho, _profundidad, _contenido, _peso, _nro, _fechaMantenimiento, _unidad, _cantidad, _material,
@@ -305,17 +342,20 @@ public class CActivo{
         }
 
         cursor.close();
+        db.close();
+
         return  listaActivos;
     }
 
-    public ArrayList<Activo> GetAllInventario(int inventario_id){
+    public ArrayList<Activo> GetAllInventario(String inventario_id){
         ArrayList<Activo> listaActivos = new ArrayList<>();
 
-        Cursor cursor = dbHelper.getReadableDatabase().query(_Tabla, new String[] {
-                        _id, _descripcion, _marca,  _modelo,_serie, _estado,
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(_Tabla, new String[]{
+                        _id, _descripcion, _marca, _modelo, _serie, _estado,
                         _color, _alto, _ancho, _profundidad, _contenido, _peso, _nro, _fechaMantenimiento, _unidad, _cantidad, _material,
                         _codigoTIC, _codigoPAT, _codigoAF, _codigoGER, _otroCodigo, _Observacion, _imagen,
-                        _TipoActivo_id, _Empleado_id,_Ubicacion_id, _Inventario_id
+                        _TipoActivo_id, _Empleado_id, _Ubicacion_id, _Inventario_id
                 },
                 _Inventario_id + "=?", new String[]{String.valueOf(inventario_id)}, null, null, null);
 
@@ -356,21 +396,23 @@ public class CActivo{
         }
 
         cursor.close();
+        db.close();
         return  listaActivos;
     }
 
-    public int Count(){
-        int count = -1;
+    public long Count(){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if(db != null) {
-            count = (int) DatabaseUtils.queryNumEntries(db, _Tabla);
+            return  (long) DatabaseUtils.queryNumEntries(db, _Tabla);
         }
-        return count;
+        db.close();
+
+        return (long) -1;
     }
 
     //cantidad de activos de iun inventario
-    public int CountId(int inventario_id){
-        int count = -1;
+    public long CountId(int inventario_id){
+        long count = -1;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         if(db != null) {
             Cursor cursor = db.query(_Tabla, null,
@@ -378,11 +420,13 @@ public class CActivo{
             count = cursor.getCount();
             cursor.close();
         }
+        db.close();
+
         return count;
     }
 
 
-    private boolean Existe(String serie) {
+    private boolean ExisteSerie(String serie) {
         boolean result = false;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -391,6 +435,20 @@ public class CActivo{
             result = (cursor.getCount() > 0);
             cursor.close();
         }
+        db.close();
+
+        return result;
+    }
+    private boolean Existe(String id) {
+        boolean result = false;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        if(db != null && Count()>0) {
+            Cursor cursor = dbHelper.getReadableDatabase().query(_Tabla, new String[]{_serie}, _id + "=?", new String[]{id}, null, null, null, null);
+            result = (cursor.getCount() > 0);
+            cursor.close();
+        }
+        db.close();
         return result;
     }
 

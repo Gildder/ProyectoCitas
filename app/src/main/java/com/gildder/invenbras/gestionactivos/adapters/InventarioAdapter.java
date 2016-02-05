@@ -60,13 +60,13 @@ public class InventarioAdapter extends RecyclerView.Adapter<vhRowInventario> {
 
         //color de prioridad
         switch (inventario.getPrioridad()){
-            case "A":
+            case "Alta":
                 viewHolder.prioridad.setBackgroundResource(R.drawable.alta_prio_rect);
                 break;
-            case "M":
+            case "Media":
                 viewHolder.prioridad.setBackgroundResource(R.drawable.media_prio_rect);
                 break;
-            case "B":
+            case "Baja":
                 viewHolder.prioridad.setBackgroundResource(R.drawable.baja_prio_rect);
                 break;
         }

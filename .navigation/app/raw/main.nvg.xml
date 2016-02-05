@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.gildder.invenbras.gestionactivos.views.MainActivity"/>
+      <point      
+        x = "500"      
+        y = "100"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.MenuState"      
+        className = "com.gildder.invenbras.gestionactivos.views.MainActivity"/>
+      <point      
+        x = "1768"      
+        y = "100"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.gildder.invenbras.gestionactivos.views.LoginActivity"/>
+      <point      
+        x = "512"      
+        y = "448"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.MenuState"      
+        className = "com.gildder.invenbras.gestionactivos.views.LoginActivity"/>
+      <point      
+        x = "1780"      
+        y = "448"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.gildder.invenbras.gestionactivos.views.ActivoActivity"/>
+      <point      
+        x = "508"      
+        y = "2964"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "com.gildder.invenbras.gestionactivos.views.FragmentTabsActivity"/>
+      <point      
+        x = "512"      
+        y = "1500"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.MenuState"      
+        className = "com.gildder.invenbras.gestionactivos.views.FragmentTabsActivity"/>
+      <point      
+        x = "1780"      
+        y = "1500"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>

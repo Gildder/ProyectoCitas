@@ -17,8 +17,8 @@ import java.io.OutputStream;
  */
 public class DBHelper extends SQLiteOpenHelper {
     private static String DB_PATH = "/data/data/com.GestionActivo/databases/";
-    public static final String DB_NOMBRE = "activo_db.db";
-    public static final int    DB_VERSION  = 2;
+    public static final String DB_NOMBRE = "MiActivo.db";
+    public static final int    DB_VERSION  = 17;
     private final Context _context;
 
     private static final String CLASSNAME = DBHelper.class.getSimpleName();
@@ -58,6 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
+            db.execSQL(TB_NOTIFICACION);
             db.execSQL(TB_INVENTARIO);
             db.execSQL(TB_UBICACION);
             db.execSQL(TB_TIPOACTIVO);
@@ -69,14 +70,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS notificacion");
         db.execSQL("DROP TABLE IF EXISTS inventario");
         db.execSQL("DROP TABLE IF EXISTS activo");
         db.execSQL("DROP TABLE IF EXISTS ubicacion");
         db.execSQL("DROP TABLE IF EXISTS tipoactivo");
         onCreate(db);
-
-
-        Log.i("INF:","Actualizamos la base de datos");
     }
 
     public void copyDatabaseToFile() {
@@ -206,9 +205,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     "    codigoActivoFijo   VARCHAR (45) NOT NULL,\n" +
                     "    codigoGerencia     VARCHAR (45) NOT NULL,\n" +
                     "    otroCodigo         VARCHAR (45) NOT NULL,\n" +
-                    "    imagen             BLOB         NOT NULL,\n" +
-                    "    observacion        TEXT         NOT NULL\n" +
-                    "                                    DEFAULT ('ninguno'),\n" +
+                    "    imagen             VARCHAR (200) NOT NULL,\n" +
+                    "    observacion        VARCHAR (200) NOT NULL,\n" +
                     "    tipoActivo_id      INTEGER (10) NOT NULL,\n" +
                     "    empleado_id        INTEGER (10) NOT NULL,\n" +
                     "    ubicacion_id       INTEGER (10) NOT NULL,\n" +
@@ -232,5 +230,15 @@ public class DBHelper extends SQLiteOpenHelper {
                     "    nombre      VARCHAR (20) NOT NULL,\n" +
                     "    descripcion TEXT         NOT NULL\n" +
                     ");\n ";
+
+    private final String TB_NOTIFICACION =
+            "CREATE TABLE notificacion (" +
+                    "    id          INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "    titulo      VARCHAR (20) NOT NULL," +
+                    "    descripcion TEXT      NOT NULL," +
+                    "    fecha       VARCHAR (30)     NOT NULL" +
+                    "                             DEFAULT ('08/12/2015')," +
+                    "    tipo        VARCHAR (20) NOT NULL" +
+                    "); ";
 
 }

@@ -35,17 +35,26 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body_1B"
+                style="@style/Body_2B"
                 android:text="Sector"
-                android:id="@+id/textView6"
+                android:layout_marginTop="10dp"
+                android:id="@+id/TxvSector"
                 android:layout_weight="0.07" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body_1B"
-                android:text="Estante"
-                android:id="@+id/textView7"
+                style="@style/Body_2B"
+                android:text="Area"
+                android:id="@+id/TxvArea"
+                android:layout_weight="0.08" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Body_2B"
+                android:text="Lugar"
+                android:id="@+id/TxvLugar"
                 android:layout_weight="0.08" />
         </LinearLayout>
 
@@ -55,45 +64,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <Spinner
+                android:id="@+id/SpnArea"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="52dp"
+                android:padding="5dp"/>
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/EdtSector"
-                android:layout_weight="0.76"
-                android:hint="A - B" />
+                style="@style/Body_1"
+                android:hint="Sector" />
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/EdtEstante"
-                android:layout_weight="0.73"
-                android:hint="lugar" />
-        </LinearLayout>
-    </LinearLayout>
+                android:id="@+id/EdtLugar"
+                style="@style/Body_1"
+                android:hint="Lugar" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout4"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
+            <!--
+            <Spinner
+                android:id="@+id/SpnSector"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/EdtObservacion"
-                android:hint="Observaciones" />
-        </LinearLayout>
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="52dp"
+                android:padding="5dp"/>
 
+
+            <Spinner
+                android:id="@+id/SpnLugar"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="52dp"
+                android:padding="5dp"/>
+            -->
+
+        </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>

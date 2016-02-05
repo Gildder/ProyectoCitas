@@ -9,45 +9,68 @@
         android:layout_width="@dimen/TxvCampos"
         android:layout_height="wrap_content"
         style="@style/Body_2B"
-        android:text="@string/TxvNroCaja"
-        android:id="@+id/TxvNroCaja"
+        android:text="@string/TxvUnidad"
+        android:id="@+id/TxvUnidad"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignLeft="@+id/TxvNroEquipo"
-        android:layout_alignStart="@+id/TxvNroEquipo" />
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/EdtNroCaja"
+        android:id="@+id/EdtCantidad"
         android:layout_weight="0.69"
-        android:hint="E - nro"
-        android:layout_below="@+id/EdtNroEquipo"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/TxvNroEquipo"
-        android:layout_toEndOf="@+id/TxvNroEquipo" />
+        android:hint="C - nro"
+        android:layout_toRightOf="@+id/TxvUnidad"
+        android:layout_toEndOf="@+id/TxvUnidad" />
+
 
     <TextView
         android:layout_width="@dimen/TxvCampos"
         android:layout_height="wrap_content"
         style="@style/Body_2B"
         android:layout_margin="10dp"
-        android:text="@string/TxvNroEquipo"
-        android:id="@+id/TxvNroEquipo"
-        android:layout_below="@+id/EdtNroEquipo"
+        android:text="@string/TxvCantidad"
+        android:id="@+id/TxvCantidad"
+        android:layout_below="@+id/EdtCantidad"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/EdtNroEquipo"
+        android:id="@+id/EdtUnidad"
         android:layout_weight="0.69"
-        android:hint="C - nro"
-        android:layout_toRightOf="@+id/TxvNroCaja"
-        android:layout_toEndOf="@+id/TxvNroCaja" />
+        android:hint="E - nro"
+        android:layout_below="@+id/EdtCantidad"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/TxvCantidad"
+        android:layout_toEndOf="@+id/TxvCantidad" />
+
+
+    <TextView
+        android:layout_width="@dimen/TxvCampos"
+        android:layout_height="wrap_content"
+        style="@style/Body_2B"
+        android:layout_margin="10dp"
+        android:text="@string/TxvMaterial"
+        android:id="@+id/TxvMaterial"
+        android:layout_below="@+id/TxvCantidad"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EdtMaterial"
+        android:layout_weight="0.69"
+        android:hint="Definir"
+        android:layout_below="@+id/EdtUnidad"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/TxvMaterial"
+        android:layout_toEndOf="@+id/TxvMaterial" />
+
 
 </RelativeLayout>

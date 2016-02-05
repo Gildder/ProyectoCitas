@@ -1,6 +1,8 @@
 package com.gildder.invenbras.gestionactivos.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +17,12 @@ import java.util.ArrayList;
 /**
  * Created by gildder on 15/10/2015.
  */
-public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
+public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo>  {
     private ArrayList<Activo> activos;
     private int itemLayout;
     private Context context;
+    private Bitmap bmp;
+    private Activo activo;
     //interface definida en interfaces
     private RecyclerViewOnItemListener recyclerViewOnItemListener;
 
@@ -38,7 +42,7 @@ public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
 
     @Override
     public void onBindViewHolder(vhRowActivo viewHolder, int position) {
-        Activo activo = activos.get(position);
+        activo = new Activo(activos.get(position));
 
         viewHolder.itemView.setSelected(itemLayout == position);
         viewHolder.getLayoutPosition();
@@ -64,6 +68,17 @@ public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
                 break;
         }
         viewHolder.tipo.setText(activo.getModelo());
+
+        //cargamos imagenes de activo
+        String pathImag = activo.getImagen();
+        if(!pathImag.equals("ninguno")) {
+            bmp = BitmapFactory.decodeFile(pathImag);
+
+            viewHolder.foto.setImageBitmap(bmp);
+        }else{
+            viewHolder.foto.setImageResource(R.drawable.ic_menu_media);
+        }
+
     }
 
     @Override
@@ -78,5 +93,6 @@ public class ActivoAdapter extends RecyclerView.Adapter<vhRowActivo> {
         activos.clear();
         notifyDataSetChanged();
     }
+
 
 }

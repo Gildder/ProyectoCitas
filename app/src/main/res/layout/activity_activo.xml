@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/LntTipoActivo">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+           <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+               <Spinner
+                   android:id="@+id/spinner"
+                   android:layout_width="match_parent"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_height="52dp"
+                   android:padding="5dp"/>
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   style="@style/Body_2"
+                   android:text="Descripcion"
+                   android:id="@+id/TxvInvDescripcion"
+                   android:layout_margin="10dp"
+                   android:layout_below="@+id/spinner"
+                   android:layout_alignParentLeft="true"
+                   android:layout_alignParentStart="true" />
+
+               <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activo"
+                android:id="@+id/TxvActivo"
+                android:background="@color/colorDividers"
+                android:textColor="@color/colorText"
+                android:padding="10dp"
+                android:textAlignment="center"
+                style="@style/Body_1B" />
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/EdtCaracteristica"
+                   android:layout_marginLeft="10dp"
+                   android:layout_marginTop="10dp"
+                   android:layout_marginRight="10dp"
+                   android:layout_weight="0.73"
+                   android:hint="Caracteristicas" />
+
+               <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LntCaracteristicas"
+                android:padding="10dp"
+                   android:layout_weight="2.62">
+
+                    <RelativeLayout
+                        android:layout_width="150dp"
+                        android:layout_height="148dp"
+                        android:id="@+id/RntFotoActivo">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/ImvFoto"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_menu_media"
+                            android:layout_alignParentBottom="true" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ImbTomarFoto"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/input_cam" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/LntCampoCarac">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/EdtModelo"
+                            android:hint="Modelo"
+                            style="@style/Body_1" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/EdtMarca"
+                            style="@style/Body_1"
+                            android:hint="Marca" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/EdtSerie"
+                            style="@style/Body_1"
+                            android:layout_gravity="center_horizontal"
+                            android:hint="Serie" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/SpnEstado"
+                            style="@style/Body_1" />
+
+
+
+                    </LinearLayout>
+
+               </LinearLayout>
+
+               <include layout="@layout/layout_cajafuerte" />
+
+               <include layout="@layout/layout_computacion" />
+
+               <include layout="@layout/layout_extintor" />
+
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="textMultiLine"
+                   android:id="@+id/EdtObservacion"
+                   android:hint="Observacion"
+                   style="@style/Body_1" />
+               <!-- Layout de codigos-->
+
+               <include layout="@layout/layout_codigo" />
+
+               <!-- Ubicacion -->
+               <include layout="@layout/layout_ubicacion" />
+
+
+
+           </LinearLayout>
+
+
+    </ScrollView>
+
+    <ImageButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:id="@+id/ImbGuardarActivo"
+        android:elevation="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_action_guardar"
+        android:background="@drawable/btn_circle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="right"/>
+
+</RelativeLayout>
+
